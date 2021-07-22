@@ -1,0 +1,14 @@
+﻿@model IEnumerable<PageGroup>
+
+<form asp-action="Create">
+
+    <select>
+        @foreach (var item in Model)
+        {
+            <option value="@item.Id">@item.GroupName</option>
+
+        }
+    </select>
+    <input type="submit" value="ثبت" class="btn btn-success" />
+
+</form>

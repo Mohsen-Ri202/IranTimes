@@ -1,0 +1,147 @@
+﻿@model IEnumerable<NewShop.Page>
+@using System.Globalization;
+
+@{
+    ViewData["Title"] = "لیست اخبار";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+}
+
+<h1>لیست اخبار</h1>
+
+<p>
+    <a asp-action="Create" class="btn btn-success">افزودن خبر</a>
+</p>
+<p>
+    <a asp-area="Admin" asp-controller="PageGroup" asp-action="Index">گروه ها</a>
+</p>
+<table class=" col-12 table-striped">
+    <thead claas="col-12 ">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Title)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ShortDescription)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Text)
+            </th>
+            <th>
+
+                @Html.DisplayNameFor(model => model.Visit)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ShowInSlider)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ImageName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CreateDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PageGroup.GroupName)
+            </th>
+            <th>
+
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Title)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ShortDescription)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Text)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Visit)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ShowInSlider)
+                </td>
+                <td>
+                    @*@Html.DisplayFor(modelItem => item.ImageName)*@
+                    <img src="~/ImageFile/@item.ImageName" class="thumbnail" style="max-width:200px;max-height:150px" />
+                </td>
+                <td>
+                    @item.CreateDate.ToShamsi()
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PageGroup.GroupName)
+                </td>
+                <td>
+                </td>
+                <td>
+                    @*<a class="btn btn-success" onclick="btnedite(@item.id)">وبرایش</a> |*@
+                    <a class="btn btn-success" asp-action="Edit" asp-route-id="@item.id">وبرایش</a> |
+                    @*<a class="btn btn-info" onclick="btndetails(@item.id)" >اطلاعات</a> |*@
+                    <a class="btn btn-info" asp-action="Details" asp-route-id="@item.id">اطلاعات</a> |
+                    <a class="btn btn-danger" asp-action="Delete" asp-route-id="@item.id">حذف</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+<div>
+    <!-- Modal -->
+    <div class="modal fade" id="Modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="ModalLabel">Modal title</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body" id="modalbody">
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    @*<button type="button" class="btn btn-primary" id="Save" onclick="deletepage()">Save changes</button>*@
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--End Modal-->
+</div>
+
+@section Scripts
+{
+    <script src="~/js/modal.js"></script>
+    <script src="~/js/bootstrap.min.js"></script>
+    <link href="~/css/bootstrap.min.css" rel="stylesheet" />
+    @*<script>
+        //function btndelete(id) {
+        //    $.get("/Admin/Home/Delete?id=" + id, function (result) {
+        //        $("#Modal").modal();
+        //        $("#ModalLabel").html("حذف ");
+        //        $("#modalbody").html(result);
+               
+        //    })
+        //};
+       
+        //function btnedite(id) {
+        //    $.get("/Admin/Home/Edit?id=" + id, function (result) {
+        //        $("#Modal").modal();
+        //        $("#ModalLabel").html("ویرایش ");
+        //        $("#modalbody").html(result);
+        //    })
+        //};
+        function btndetails(id) {
+            $.get("/Admin/Home/Details?id=" + id, function (result) {
+                $("#Modal").modal();
+                $("#ModalLabel").html("اطلاعات ");
+                $("#modalbody").html(result);
+            })
+        }
+    </script>*@
+}

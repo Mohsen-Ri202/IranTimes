@@ -1,0 +1,101 @@
+﻿@model Page
+@{
+    Layout = "~/Views/Shared/_DefaultLayout.cshtml";
+
+}
+@inject ICommentRepository _commentrepository
+
+<div class="single">
+    <img src="~/ImageFile/@Model.ImageName" class="img-responsive" alt="News image">
+    <br /><br />
+    <div class="b-bottom">
+        <h3 class="top">@Model.Title</h3><br />
+        <h6 class="top">@Model.ShortDescription</h6><br /><br />
+        <p class="sub"> @Model.Text</p>
+        <p>@Model.CreateDate <a class="span_link" href="#"><span class="glyphicon glyphicon-comment"></span>0 </a><a class="span_link" href="#"><span class="glyphicon glyphicon-eye-open"></span>@Model.Visit </a></p>
+    </div>
+</div>
+<span />
+@*@await Component.InvokeAsync("ShowComment", Model)*@
+@*<partial name="_Comment" model="Model" />*@
+@*<ul id="commentlist">
+        @foreach (var item in _commentrepository.GetCommentById(Model.id))
+        {
+
+            <partial name="_ShowComment" model="item" />
+
+        }
+    </ul>*@
+
+<div id="commentlist">
+    @foreach (var item in Model.Comments)
+    {
+
+        <div class="media response-info">
+            <div class="media-right response-text-right">
+                <a href="#">
+                    <img src="images/sin1.jpg" class="img-responsive" alt="">
+                </a>
+            </div>
+            <div class="media-body response-text-left">
+
+                <h5>@item.Name</h5>
+                <p>@item.Text</p>
+                <ul>
+                    <li>@item.CreateDate</li>
+
+                </ul>
+
+            </div>
+            <div class="clearfix"> </div>
+        </div>
+
+    }
+</div>
+<div class="coment-form" id="com">
+    <h4>نظرات</h4>
+    <form action="" method="Post">
+        <input id="txtname" type="text" value="نام" name="Name" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Name';}" required="">
+        <input id="txtemail" type="email" value="ایمیل" name="Email" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Email';}" required="">
+        <input id="txtweb" type="text" value="وب سایت" name="Websie" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Website';}" required="">
+        <textarea id="txttext" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Your Comment...';}" required="">پیام...</textarea>
+        <input type="button" value="ارسال" onclick="Addcomment()" />
+        @*<input type="hidden"  />*@
+    </form>
+</div>
+<script>
+    function Addcomment() {
+        $.ajax({
+            url: "/News/Comment/" +@Model.id,
+            type: "GET",
+            data: {
+                Name: $("#txtname").val(), Email: $("#txtemail").val(), WebSite: $("#txtweb").val(), Text: $("#txttext").val()
+            },
+            dataType:"json"
+            , success: function (result) {
+                var currentdate = new Date();
+                $("#commentlist").append(
+
+                    "<div class='media response-info'><div class='media-right response-text-right'><a href='#'><img src='images/sin1.jpg' class='img-responsive' alt=''></a></div><div class='media-body response-text-left'><h5>" + $('#txtname').val() + "</h5><p>" + $('#txttext').val() +"</p><ul><li>"+currentdate.getDate()+"</li> </ul></div><div class='clearfix'> </div></div>"
+                );
+
+
+                
+            }
+      }).done(function (result) {
+      /*$("#commentlist").html(result);*/
+            $("#txtname").val("");
+            $("#txtemail").val("");
+            $("#txtweb").val("");
+            $("#txttext").val("");
+        });
+    }
+</script>
+
+
+@*//success: function (text) {
+    //    if (text == "s") {
+    //        alert("sabt shod");
+    //    } else {
+    //        alert("error");
+    //    }*@

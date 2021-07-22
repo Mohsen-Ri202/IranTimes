@@ -1,0 +1,11 @@
+﻿@inject IPageGroupRepository _pagegrouprepository
+@model Page 
+@{ var result = _pagegrouprepository.GetAllGroups();}
+    <select asp-for="PageGroupId">
+        @foreach (var item in result)
+        {
+            <option value="@item.Id">@item.GroupName</option>
+
+        }
+    </select>
+

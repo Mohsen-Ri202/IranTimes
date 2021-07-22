@@ -1,0 +1,55 @@
+﻿@model NewShop.Page
+
+@{
+    ViewData["Title"] = "حذف";
+  
+
+}
+
+
+<h3>آیا از حذف این خبر اطمینان دارید ؟</h3>
+<div>
+    
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Title)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Title)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.ShortDescription)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.ShortDescription)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Text)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Text)
+        </dd>
+       
+        @*<dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.ImageName)
+        </dt>*@
+        @*<dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.ImageName)
+        </dd>*@
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.CreateDate)
+        </dt>
+        <dd class = "col-sm-10">
+            @*@Html.DisplayFor(model => model.CreateDate.ToShamsi())*@
+            @Model.CreateDate.ToShamsi();
+        </dd>
+       
+    </dl>
+    
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="id" />
+        <input type="submit" value="حذف" class="btn btn-danger" /> |
+        <a asp-action="Index">  بازگشت به لیست اخبار</a>
+    </form>
+</div>

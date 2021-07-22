@@ -1,0 +1,46 @@
+﻿@model IEnumerable<Comment>
+
+
+ 
+@foreach (var item in Model)
+{
+<div class="media response-info">
+    <div class="media-right response-text-right">
+        <a href="#">
+            <img src="~/images/sin1.jpg" class="img-responsive" alt="">
+        </a>
+    </div>
+    <div class="media-body response-text-left">
+        <h5>@item.Name</h5>
+        <p>@item.Text</p>
+        <ul>
+            <li>@item.CreateDate</li>
+            <li>
+                <a href="#com">
+                    پاسخ
+                </a>
+            </li>
+        </ul>
+        @*<div class="media response-info">
+            <div class="media-right response-text-right">
+                <a href="#">
+                    <img src="images/sin2.jpg" class="img-responsive" alt="">
+                </a>
+            </div>
+            <div class="media-body response-text-left">
+                <p>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است و برای شرایط فعلی تکنولوژی مورد نیاز و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد</p>
+                <ul>
+                    <li>July 17, 2016</li>
+                    <li>
+                        <a href="#">
+                            پاسخ
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <div class="clearfix"> </div>
+        </div>*@
+    </div>
+    <div class="clearfix"> </div>
+</div> 
+}

@@ -1,0 +1,245 @@
+﻿@*@{
+        ViewData["Title"] = "View";
+    }*@
+@using Microsoft.AspNetCore.Identity;
+
+@inject UserManager<IdentityUser> _userManager;
+@inject SignInManager<IdentityUser> _signInManager;
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title>قالب سایت وبلاگ</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="keywords" content="Style Blog Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template,
+Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyEricsson, Motorola web design" />
+    <script type="applijewelleryion/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+    <link href="~/css/bootstrap.css" rel='stylesheet' type='text/css' />
+    <!-- Custom Theme files -->
+    <link href='//fonts.googleapis.com/css?family=Raleway:400,600,700' rel='stylesheet' type='text/css'>
+    <link href="~/css/style.css" rel='stylesheet' type='text/css' />
+    <script src="~/js/jquery-1.11.1.min.js"></script>
+    <script src="~/js/bootstrap.min.js"></script>
+    <!-- animation-effect -->
+    <link href="~/css/animate.min.css" rel="stylesheet">
+    <script src="~/js/wow.min.js"></script>
+    <script>
+        new WOW().init();
+    </script>
+    <!-- //animation-effect -->
+    <!--ترجمه شده توسط مرجع تخصصی برنامه نویسان-->
+</head>
+<body>
+    <div class="header" id="ban">
+        <div class="container">
+            <div class="head-right wow fadeInRight animated animated animated" data-wow-delay=".5s" style="visibility: visible; animation-delay: 0.5s; animation-name: fadeInRight;">
+                <div class="header-search">
+                    <div class="search">
+                        <input class="search_box" type="checkbox" id="search_box">
+                        <label class="icon-search" for="search_box"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></label>
+                        <div class="search_form">
+                            @*<form asp-controller="Search" asp-action="Index" method="post">
+            <input type="search" name="q" placeholder="جستجو...">
+            <input type="submit" value="ارسال">
+        </form>*@
+                            <form asp-controller="Search" asp-action="Index" method="post">
+                                <input type="search" name="q" value="جستجو..." onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Search';}" required="">
+                                <input type="submit" value=" ">
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="header_left wow fadeInRight animated animated animated" data-wow-delay=".5s" style="visibility: visible; animation-delay: 0.5s; animation-name: fadeInRight;">
+                <nav class="navbar navbar-default">
+                    <!-- Brand and toggle get grouped for better mobile display -->
+                    <!--ترجمه شده توسط مرجع تخصصی برنامه نویسان-->
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                    </div>
+
+                    <!-- Collect the nav links, forms, and other content for toggling -->
+                    <div class="collapse navbar-collapse nav-wil" id="bs-example-navbar-collapse-1">
+                        <nav class="link-effect-7" id="link-effect-7">
+                            <ul class="nav navbar-nav">
+                                <li class="active act"><a asp-action="Index">صفحه اصلی</a></li>
+                                <li><a asp-action="AboutUs">درباره ما</a></li>
+                                <li><a href="features.html">امکانات</a></li>
+                                <li><a href="travel.html">جهانگردی</a></li>
+                                <li><a href="fashion.html">جزییات</a></li>
+                                <li><a asp-action="ContactUs">تماس با ما</a></li>
+                            </ul>
+                        </nav>
+                    </div>
+                    <!-- /.navbar-collapse -->
+                    <!--ترجمه شده توسط مرجع تخصصی برنامه نویسان-->
+                </nav>
+            </div>
+            <div class="nav navbar-nav navbar-left social-icons wow fadeInLeft animated animated animated" data-wow-delay=".5s" style="visibility: visible; animation-delay: 0.5s; animation-name: fadeInLeft;">
+                <ul>
+                    <li><a href="#"> </a></li>
+                    <li><a href="#" class="pin"> </a></li>
+                    <li><a href="#" class="in"> </a></li>
+                    <li><a href="#" class="be"> </a></li>
+                    <li><a href="#" class="vimeo"> </a></li>
+                </ul>
+
+            </div>
+            @if (_signInManager.IsSignedIn(User))
+            {
+                <div style="display:inline-block;margin-right:20px;margin-top:10px"> <p>  @User.Identity.Name  عزیز خوش آمدید / <a asp-area="Admin" asp-controller="Home" asp-action="Index">پنل ادمین</a> / <a asp-controller="Account" asp-action="LogOut">خروج</a></p></div>
+                <p> </p>
+                
+            }
+            else
+            {
+                <div style="display:inline-block;margin-right:30px;margin-top:10px"><a asp-controller="Account" asp-action="Login">ورود</a>/<a asp-controller="Account" asp-action="Register">ثبت نام</a></div>
+            }
+            <div class="clearfix"> </div>
+        </div>
+
+    </div>
+    <div class="header-bottom">
+        <div class="container">
+            <div class="logo wow fadeInDown animated" data-wow-duration=".8s" data-wow-delay=".2s" style="visibility: visible; animation-duration: 0.8s; animation-delay: 0.2s; animation-name: fadeInDown;">
+                <h1><a asp-action="Index">Iran Times</a></h1>
+                <p>
+                    <label class="of"></label>
+                    ایران تایمز یک خبرگزاری متفاوت<label class="on"></label>
+                </p>
+            </div>
+        </div>
+    </div>
+    <div class="banner">
+        <div class="container">
+            <h2>ایران تایمز یک خبرگزاری بین المللی است </h2>
+            <p>
+                شماهم میتوانید در ایران تایمز خبرنگار باشید و گزارش های خود را از سراسر دنیا منتشر کنید فقط کافیست قوانین را
+                مطالعه کرده و درصورت نداشتن مشکل ثبت نام کنید
+            </p>
+            <a asp-controller="Home" asp-action="Ruls">مطالعه قوانین و ثبت نام</a>
+        </div>
+    </div>
+    <div class="technology">
+        <div class="container">
+            <div class="col-md-9 technology-right">
+                <div class="tech-no">
+                    @RenderBody()
+                </div>
+            </div>
+            @*@RenderSection("News",required:false)*@
+            <!-- technology-left -->
+            <!--ترجمه شده توسط مرجع تخصصی برنامه نویسان-->
+            <div class="col-md-3 technology-left">
+
+
+                <div class="blo-top1">
+
+                    <div class="tech-btm">
+                        <div class="search-1 wow fadeInDown animated" data-wow-duration=".8s" data-wow-delay=".2s" style="visibility: visible; animation-duration: 0.8s; animation-delay: 0.2s; animation-name: fadeInDown;">
+                            <form asp-controller="Search" asp-action="Index" method="post">
+                                <input type="search" name="q" value="جستجو..." onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Search';}" required="">
+                                <input type="submit" value=" ">
+                            </form>
+                        </div>
+                        <h4>
+                            پست های محبوب
+                        </h4>
+
+                        @await Component.InvokeAsync("Popular")
+
+                        <div class="insta wow fadeInDown animated" data-wow-duration=".8s" data-wow-delay=".2s" style="visibility: visible; animation-duration: 0.8s; animation-delay: 0.2s; animation-name: fadeInDown;">
+                            <h4>اینستاگرام</h4>
+                            <ul>
+
+                                <li><a href="singlepage.html"><img src="~/images/t1.jpg" class="img-responsive" alt=""></a></li>
+                                <li><a href="singlepage.html"><img src="~/images/m1.jpg" class="img-responsive" alt=""></a></li>
+                                <li><a href="singlepage.html"><img src="~/images/f1.jpg" class="img-responsive" alt=""></a></li>
+                                <li><a href="singlepage.html"><img src="~/images/m2.jpg" class="img-responsive" alt=""></a></li>
+                                <li><a href="singlepage.html"><img src="~/images/f2.jpg" class="img-responsive" alt=""></a></li>
+                                <li><a href="singlepage.html"><img src="~/images/t2.jpg" class="img-responsive" alt=""></a></li>
+                                <li><a href="singlepage.html"><img src="~/images/f3.jpg" class="img-responsive" alt=""></a></li>
+                                <li><a href="singlepage.html"><img src="~/images/t3.jpg" class="img-responsive" alt=""></a></li>
+                                <li><a href="singlepage.html"><img src="~/images/m3.jpg" class="img-responsive" alt=""></a></li>
+                            </ul>
+                        </div>
+
+                        <p>ما را در اینستاگرام و توییتر دنبال کنید تا از جدید ترین اخبار مطلع شوید </p>
+                        <div class="mediaicon">
+                            <a href="http://twitter.com" class="fa fa-twitter" style="width:20px;" ></a>
+                            <a href="http://instagram.com" class="fa fa-instagram" style="width: 20px; margin: auto"></a>
+                            <div class="twt">
+                            </div>
+                            @*<iframe id="twitter-widget-0" scrolling="no" frameborder="0" allowtransparency="true" class="twitter-hashtag-button twitter-hashtag-button-rendered twitter-tweet-button" title="Twitter Tweet Button" src="https://twitter.com/widgets/tweet_button.b7de008f493a5185d8df1aedd62d77c6.en.html#button_hashtag=TwitterStories&amp;dnt=false&amp;id=twitter-widget-0&amp;lang=en&amp;original_referer=https%3A%2F%2Fp.w3layouts.com%2Fdemos%2Fduplex%2Fweb%2F&amp;size=l&amp;time=1467721486626&amp;type=hashtag" style="position: static; visibility: visible; width: 166px; height: 28px;"></iframe>*@
+                            <script>!function (d, s, id) { var js, fjs = d.getElementsByTagName(s)[0], p = /^http:/.test(d.location) ? 'http' : 'https'; if (!d.getElementById(id)) { js = d.createElement(s); js.id = id; js.src = p + '://platform.twitter.com/widgets.js'; fjs.parentNode.insertBefore(js, fjs); } }(document, 'script', 'twitter-wjs');</script>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="clearfix"></div>
+            <!-- technology-left -->
+        </div>
+    </div>
+
+    <div class="footer">
+        <div class="container">
+            <div class="col-md-4 footer-right wow fadeInDown" data-wow-duration=".8s" data-wow-delay=".2s">
+                <h4>درباره من</h4>
+                <p>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است</p>
+                <img src="images/t4.jpg" class="img-responsive" alt="">
+                <div class="bht1">
+                    <a href="singlepage.html">ادامه مطلب</a>
+                </div>
+            </div>
+            <div class="col-md-4 footer-middle wow fadeInDown" data-wow-duration=".8s" data-wow-delay=".2s">
+                <h4>
+                    آخرین توییت
+                </h4>
+                <div class="mid-btm">
+                    <p>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است</p>
+                    <a href="http://barnamenevisan.org/">http://barnamenevisan.org/</a>
+                </div>
+
+                <p>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است</p>
+                <a href="http://barnamenevisan.org/">http://barnamenevisan.org/</a>
+
+            </div>
+            <div class="col-md-4 footer-left wow fadeInDown" data-wow-duration=".8s" data-wow-delay=".2s">
+                <h4>
+                    عضویت در خبرنامه
+                </h4>
+                <p>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است</p>
+                <div class="name">
+                    <form action="#" method="post">
+                        <input type="text" placeholder="نام" required="">
+                        <input type="text" placeholder="ایمیل" required="">
+                        <input type="submit" value="همین الان عضو شوید">
+                    </form>
+
+                </div>
+
+                <div class="clearfix"> </div>
+
+            </div>
+            <div class="clearfix"></div>
+        </div>
+    </div>
+    <div class="copyleft wow fadeInDown" data-wow-duration=".8s" data-wow-delay=".2s">
+        <div class="container">
+            <p>کلیه حقوق مادی و معنوی برای مجموعه برنامه نویسان محفوظ می باشد <a href="http://barnamenevisan.org/">برنامه نویسان</a></p>
+        </div>
+    </div>
+    <script src="~/js/modal.js"></script>
+    <script src="~/js/bootstrap.min.js"></script>
+    @RenderSection("Scripts", required: false)
+
+    @*@RenderSection("modal", required: false)*@
+
+</body>
+</html>

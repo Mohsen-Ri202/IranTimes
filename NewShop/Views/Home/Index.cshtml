@@ -1,0 +1,46 @@
+﻿@model IEnumerable<Page>
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<html>
+
+<body>
+
+    <div class="tech-no">
+        @foreach (var item in Model)
+        {
+            <Partial name="_BoxView" model="@item" />
+        }
+    </div>
+    <hr />
+    <div class="row text-center" >
+        <nav aria-label="Page navigation example">
+            <ul class="pagination">
+                @if (ViewBag.PageId != 1)
+                {
+                    <li class="page-item">
+                        <a class="page-link" asp-controller="Home" asp-action="Index" asp-route-pageid="@(--ViewBag.PageId)" aria-label="Previous">
+                            <span aria-hidden="true">«</span>
+                        </a>
+                    </li>
+                }
+                @for (int i = 1; i <= (ViewBag.PageCount +1 ); i++)
+                {
+                    <li class="@((ViewBag.PageId==i)?"active":"")"><a class="page-link" asp-controller="Home" asp-action="Index" asp-route-pageid="@i">@i</a></li>
+
+                }
+                @if (ViewBag.PageId == ViewBag.PageCount)
+                {
+                    <li class="page-item">
+                        <a class="page-link" asp-controller="Home" asp-action="Index" asp-route-pageid="@(++ViewBag.PageId)" aria-label="Next">
+                            <span aria-hidden="true">»</span>
+                        </a>
+                    </li>
+                }
+            </ul>
+        </nav>
+    </div>
+</body>
+
+</html>

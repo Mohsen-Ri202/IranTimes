@@ -1,0 +1,30 @@
+﻿@model Page
+
+<div class="coment-form" id="com">
+    <h4>نظرات</h4>
+    <form action="#" method="post">
+        <input id="txtname" type="text" value="نام" name="Name" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Name';}" required="">
+        <input id="txtemail" type="email" value="ایمیل" name="Email" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Email';}" required="">
+        <input id="txtweb" type="text" value="وب سایت" name="Websie" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Website';}" required="">
+        <textarea id="txttext" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Your Comment...';}" required="">پیام...</textarea>
+        <input type="submit" value="ارسال" onclick="Addcomment()">
+    </form>
+</div>
+<script>
+    function Addcomment() {
+        $.ajax({
+            url: "/News/Comment/" +@Model.id,
+            type: "Get",
+            data: {
+                Name: $("#txtname").val(), Email: $("#txtemail").val(), WebSite: $("#txtweb").val(), Text: $("#txttext").val()
+            }
+
+        }).done(function (result) {
+            //$("#commentlist").html(result);
+            $("#txtname").val("");
+            $("#txtemail").val("");
+            $("#txtweb").val("");
+            $("#txttext").val("");
+        });
+    }
+</script>

@@ -1,0 +1,58 @@
+﻿@model IEnumerable<Page>
+@*@{
+        Layout = "~/View/Shared/_DefaultLayout";
+    }*@
+
+@if (ViewBag.name == "جستجو...")
+{
+
+    <div class="alert-danger" style="font-size:30px ; padding:20px">
+        موردی یافت نشد 
+    </div>
+}
+else
+{
+    <h3>تعداد @Model.Count() / با @ViewBag.name یافت شد</h3>
+    <ul>
+        @foreach (var item in Model)
+        {
+            <li>
+                <div class="wthree">
+                    <div class="col-md-6 wthree-right wow fadeInDown animated" data-wow-duration=".8s" data-wow-delay=".2s" style="visibility: visible; animation-duration: 0.8s; animation-delay: 0.2s; animation-name: fadeInDown;">
+                        <div class="tch-img">
+                            <a href="singlepage.html"><img src="~/images/f1.jpg" class="img-responsive" alt=""></a>
+                        </div>
+                    </div>
+                    <div class="col-md-6 wthree-left wow fadeInDown animated" data-wow-duration=".8s" data-wow-delay=".2s" style="visibility: visible; animation-duration: 0.8s; animation-delay: 0.2s; animation-name: fadeInDown;">
+                        <h3>
+                            <a href="singlepage.html">
+
+                                @item.Title
+                            </a>
+                        </h3>
+                        <h6>
+                            گروه <a href="singlepage.html">
+
+                                @item.PageGroup.GroupName
+                            </a>@item.CreateDate.ToShamsi()
+                        </h6>
+                        <p>@item.ShortDescription</p>
+                        <div class="bht1">
+                            <a href="singlepage.html">ادامه مطلب</a>
+                        </div>
+                        <div class="soci">
+                            <ul>
+
+                                <li class="hvr-rectangle-out"><a class="twit" href="#"></a></li>
+                                <li class="hvr-rectangle-out"><a class="pin" href="#"></a></li>
+                            </ul>
+                        </div>
+                        <div class="clearfix"></div>
+
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+            </li>
+        }
+    </ul>
+}
