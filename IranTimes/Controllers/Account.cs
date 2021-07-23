@@ -37,7 +37,7 @@ namespace NewShop.Controllers
             {
                UserName=model.UserName,
                Email=model.Email,
-
+              
             };
             var result = await _userManager.CreateAsync(user,model.Password);
             if (result.Succeeded)
@@ -46,8 +46,8 @@ namespace NewShop.Controllers
                 var emailMessage = Url.Action("ConfirmEmail", "Account", new { username = user.UserName, token = emailConfirmationToken }
                 ,Request.Scheme);
                 await _messageSender.SendEmailAsync(model.Email, "EmailConfirm", emailMessage);
+                return View("RegisterSuccess");
 
-               return RedirectToAction("Index");
             }
             foreach (var item in result.Errors)
             {
