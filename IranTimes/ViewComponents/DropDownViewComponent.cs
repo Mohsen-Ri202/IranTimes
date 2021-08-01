@@ -15,7 +15,7 @@ namespace NewShop
         }
         public async Task<IViewComponentResult> InvokeAsync()
         {
-            var model = _context.PageGroups;
+            var model =  _context.PageGroups;
             return View(model);
         }
     }

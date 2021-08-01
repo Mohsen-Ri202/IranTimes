@@ -43,8 +43,9 @@ namespace NewShop.Controllers
             if (result.Succeeded)
             {
                 var emailConfirmationToken = await _userManager.GenerateEmailConfirmationTokenAsync(user);
+                
                 var emailMessage = Url.Action("ConfirmEmail", "Account", new { username = user.UserName, token = emailConfirmationToken }
-                ,Request.Scheme);
+                , Request.Scheme); 
                 await _messageSender.SendEmailAsync(model.Email, "EmailConfirm", emailMessage);
                 return View("RegisterSuccess");
 
@@ -86,18 +87,7 @@ namespace NewShop.Controllers
             ModelState.AddModelError("","اطلاعات نا معتبر است");
             return View();
         }
-        public async Task<IActionResult> IsExistUser(string username)
-        {
-            var user = await _userManager.FindByNameAsync(username);
-            if (user==null)
-            {
-                return Json(true);
-            }
-            else
-            {
-                return Json("این کاربر قبلا ثبت نام کرده است");
-            }
-        }
+      
         public async Task<IActionResult> LogOut()
         {
             await _signInManager.SignOutAsync();
@@ -115,11 +105,35 @@ namespace NewShop.Controllers
             var result = await _userManager.ConfirmEmailAsync(user, token);
             if (result.Succeeded)
             {
-              return  Content("confirm");
+              return  View("/Views/Account/EmailConfirm.cshtml");
             }
             else
             {
               return  Content("NotConfirmd");
+            }
+        }
+        public async Task<IActionResult> IsExistUser(string username)
+        {
+            var user = await _userManager.FindByNameAsync(username);
+            if (user == null)
+            {
+                return Json(true);
+            }
+            else
+            {
+                return Json("این کاربر قبلا ثبت نام کرده است");
+            }
+        }
+        public async Task<IActionResult> IsExistEmail(string email)
+        {
+            var user = await _userManager.FindByEmailAsync(email);
+            if (user==null)
+            {
+                return Json(true);
+            }
+            else
+            {
+                return Json("این ایمیل قبلا ثبت شده");
             }
         }
     }

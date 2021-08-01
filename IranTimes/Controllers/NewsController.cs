@@ -40,17 +40,9 @@ namespace NewShop
                 };
                 _commentrepository.AddComment(newcomment);
                 _commentrepository.Save();
-            return Json(newcomment);
-
-            //return RedirectToAction("ShowComments",newcomment.PageID);
-            //var model=  _pageRepository.GetPageById(id);
-            //return RedirectToAction("ShowCommentViewModel",model);
-
+            return Json(newcomment);       
         }
-        //public IActionResult ShowComments(int id)
-        //{
-        //    return PartialView(_commentrepository.GetCommentById(id));
-        //}
+     
        public IActionResult NestedComment()
         {
 

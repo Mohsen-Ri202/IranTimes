@@ -28,12 +28,10 @@ namespace NewShop
             services.AddControllersWithViews();
             #region Connection String      
             services.AddDbContext<NewCmsContext>(options => {
-                options.UseSqlServer(connectionString: "Data Source=.;initial Catalog=NewCms_DB;Integrated Security=True");
+                options.UseSqlServer(Configuration.GetConnectionString("ConnectionString"));
                 });
             #endregion
-            services.AddMvc(options => options.EnableEndpointRouting = false);
-            services.AddControllersWithViews();
-            services.AddRazorPages();
+
             #region IOC
             services.AddScoped<IPageRepository, PageRepository>();
             services.AddScoped<IPageGroupRepository, PageGroupRepository>();
@@ -41,10 +39,11 @@ namespace NewShop
             services.AddScoped<IMessageSender, MessageSender>();
             //services.AddIdentity<IdentityUser, IdentityRole>();
             #endregion
+
             #region Identity
             services.AddIdentity<IdentityUser,IdentityRole>(option=> {
                 option.Password.RequiredUniqueChars = 0;
-                
+                option.Password.RequireNonAlphanumeric = false;
             })
                 .AddEntityFrameworkStores<NewCmsContext>()
                 .AddDefaultTokenProviders()

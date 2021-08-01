@@ -28,33 +28,14 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
         new WOW().init();
     </script>
     <!-- //animation-effect -->
-    <!--ترجمه شده توسط مرجع تخصصی برنامه نویسان-->
 </head>
 <body>
     <div class="header" id="ban">
         <div class="container">
-            <div class="head-right wow fadeInRight animated animated animated" data-wow-delay=".5s" style="visibility: visible; animation-delay: 0.5s; animation-name: fadeInRight;">
-                <div class="header-search">
-                    <div class="search">
-                        <input class="search_box" type="checkbox" id="search_box">
-                        <label class="icon-search" for="search_box"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></label>
-                        <div class="search_form">
-                            @*<form asp-controller="Search" asp-action="Index" method="post">
-            <input type="search" name="q" placeholder="جستجو...">
-            <input type="submit" value="ارسال">
-        </form>*@
-                            <form asp-controller="Search" asp-action="Index" method="post">
-                                <input type="search" name="q" value="جستجو..." onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Search';}" required="">
-                                <input type="submit" value=" ">
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            
             <div class="header_left wow fadeInRight animated animated animated" data-wow-delay=".5s" style="visibility: visible; animation-delay: 0.5s; animation-name: fadeInRight;">
                 <nav class="navbar navbar-default">
                     <!-- Brand and toggle get grouped for better mobile display -->
-                    <!--ترجمه شده توسط مرجع تخصصی برنامه نویسان-->
                     <div class="navbar-header">
                         <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
                             <span class="sr-only">Toggle navigation</span>
@@ -78,28 +59,19 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                         </nav>
                     </div>
                     <!-- /.navbar-collapse -->
-                    <!--ترجمه شده توسط مرجع تخصصی برنامه نویسان-->
                 </nav>
             </div>
-            <div class="nav navbar-nav navbar-left social-icons wow fadeInLeft animated animated animated" data-wow-delay=".5s" style="visibility: visible; animation-delay: 0.5s; animation-name: fadeInLeft;">
-                <ul>
-                    <li><a href="#"> </a></li>
-                    <li><a href="#" class="pin"> </a></li>
-                    <li><a href="#" class="in"> </a></li>
-                    <li><a href="#" class="be"> </a></li>
-                    <li><a href="#" class="vimeo"> </a></li>
-                </ul>
-
-            </div>
+         
             @if (_signInManager.IsSignedIn(User))
             {
-                <div style="display:inline-block;margin-right:20px;margin-top:10px"> <p>  @User.Identity.Name  عزیز خوش آمدید / <a asp-area="Admin" asp-controller="Home" asp-action="Index">پنل ادمین</a> / <a asp-controller="Account" asp-action="LogOut">خروج</a></p></div>
-                <p> </p>
-                
+                <div style="display:flex;margin-right:20px;margin-top:10px;justify-content:left"> <p>  @User.Identity.Name  عزیز خوش آمدید / <a asp-area="Admin" asp-controller="Home" asp-action="Index">پنل ادمین</a> / <a asp-controller="Account" asp-action="LogOut">خروج</a></p></div>
+                              
             }
             else
             {
-                <div style="display:inline-block;margin-right:30px;margin-top:10px"><a asp-controller="Account" asp-action="Login">ورود</a>/<a asp-controller="Account" asp-action="Register">ثبت نام</a></div>
+                
+        <div style="display:flex;margin-right:30px;margin-top:10px;justify-content:left"><a asp-controller="Account" asp-action="Login">ورود</a>/<a asp-controller="Account" asp-action="Register">ثبت نام</a></div>
+           
             }
             <div class="clearfix"> </div>
         </div>
@@ -135,7 +107,6 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
             </div>
             @*@RenderSection("News",required:false)*@
             <!-- technology-left -->
-            <!--ترجمه شده توسط مرجع تخصصی برنامه نویسان-->
             <div class="col-md-3 technology-left">
 
 
@@ -203,11 +174,9 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                 </h4>
                 <div class="mid-btm">
                     <p>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است</p>
-                    <a href="http://barnamenevisan.org/">http://barnamenevisan.org/</a>
                 </div>
 
                 <p>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است</p>
-                <a href="http://barnamenevisan.org/">http://barnamenevisan.org/</a>
 
             </div>
             <div class="col-md-4 footer-left wow fadeInDown" data-wow-duration=".8s" data-wow-delay=".2s">
@@ -232,14 +201,13 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     </div>
     <div class="copyleft wow fadeInDown" data-wow-duration=".8s" data-wow-delay=".2s">
         <div class="container">
-            <p>کلیه حقوق مادی و معنوی برای مجموعه برنامه نویسان محفوظ می باشد <a href="http://barnamenevisan.org/">برنامه نویسان</a></p>
+            <p>کلیه حقوق مادی و معنوی برای مجموعه برنامه نویسان محفوظ می باشد </p>
         </div>
     </div>
     <script src="~/js/modal.js"></script>
     <script src="~/js/bootstrap.min.js"></script>
     @RenderSection("Scripts", required: false)
 
-    @*@RenderSection("modal", required: false)*@
 
 </body>
 </html>

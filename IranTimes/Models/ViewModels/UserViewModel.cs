@@ -14,14 +14,18 @@ namespace NewShop
         [Required(ErrorMessage = "لطفا{0} را وارد کنید")]
         [MaxLength(150)]
         public string UserName { get; set; }
+
+        [Remote("IsExistEmail", "Account", HttpMethod = "POST")]
         [Display(Name = "ایمیل")]
         [Required(ErrorMessage = "لطفا{0} را وارد کنید")]
         [DataType(DataType.EmailAddress)]
         public string Email { get; set; }
+
         [Display(Name = "کلمه عبور")]
         [Required(ErrorMessage = "لطفا{0} را وارد کنید")]
         [DataType(DataType.Password)]
         public string Password { get; set; }
+
         [Display(Name = "کلمه عبور")]
         [Required(ErrorMessage = "لطفا{0} را وارد کنید")]
         [DataType(DataType.Password)]

@@ -9,7 +9,6 @@ using NewShop;
 using System.IO;
 using System.ComponentModel;
 using Microsoft.AspNetCore.Http;
-
 namespace NewShop.Areas
 {
     [Area("Admin")]
@@ -55,7 +54,7 @@ namespace NewShop.Areas
 
         public IActionResult Create()
         {
-        
+             
             return View();
         }
 

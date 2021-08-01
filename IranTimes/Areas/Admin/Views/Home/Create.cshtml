@@ -1,6 +1,4 @@
 ﻿@model NewShop.Page
-
-
 @{
     ViewData["Title"] = "Create";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -39,8 +37,7 @@
                 <input type="file" name="ImgUp" />
             </div>
 
-            @*<label asp-for="@Model.PageGroup.GroupName" class="control-label"></label>
-                <partial name="_DropDown"/>*@
+        
             @await Component.InvokeAsync("DropDown")
             <div class="form-group">
                 <input type="submit" value="ثبت" class="btn btn-success" />
