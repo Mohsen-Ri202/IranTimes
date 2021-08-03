@@ -16,16 +16,6 @@
     </div>
 </div>
 <span />
-@*@await Component.InvokeAsync("ShowComment", Model)*@
-@*<partial name="_Comment" model="Model" />*@
-@*<ul id="commentlist">
-        @foreach (var item in _commentrepository.GetCommentById(Model.id))
-        {
-
-            <partial name="_ShowComment" model="item" />
-
-        }
-    </ul>*@
 
 <div id="commentlist">
     @foreach (var item in Model.Comments)
@@ -82,7 +72,6 @@
                 
             }
       }).done(function (result) {
-      /*$("#commentlist").html(result);*/
             $("#txtname").val("");
             $("#txtemail").val("");
             $("#txtweb").val("");

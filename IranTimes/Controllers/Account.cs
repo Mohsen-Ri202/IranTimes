@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using IranTimes;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using System;
@@ -87,7 +88,8 @@ namespace NewShop.Controllers
             ModelState.AddModelError("","اطلاعات نا معتبر است");
             return View();
         }
-      
+      [HttpPost]
+      [ValidateAntiForgeryToken]
         public async Task<IActionResult> LogOut()
         {
             await _signInManager.SignOutAsync();
@@ -112,6 +114,8 @@ namespace NewShop.Controllers
               return  Content("NotConfirmd");
             }
         }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> IsExistUser(string username)
         {
             var user = await _userManager.FindByNameAsync(username);
@@ -124,6 +128,8 @@ namespace NewShop.Controllers
                 return Json("این کاربر قبلا ثبت نام کرده است");
             }
         }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> IsExistEmail(string email)
         {
             var user = await _userManager.FindByEmailAsync(email);
@@ -136,5 +142,55 @@ namespace NewShop.Controllers
                 return Json("این ایمیل قبلا ثبت شده");
             }
         }
+
+        public  IActionResult ForgotPassword()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> ForgotPassword(string email)
+        {
+          
+            var user = await _userManager.FindByEmailAsync(email);
+            if (user==null)
+            {
+                ModelState.AddModelError("", "ایمیل شما نا معتبر است");
+            }
+                      
+            var resetPasswordToken = await _userManager.GeneratePasswordResetTokenAsync(user);
+
+            var emailMessage = Url.Action("ResetPassword", "Account", new { username = user.UserName, token = resetPasswordToken }
+            , Request.Scheme);
+            await _messageSender.SendEmailAsync(email, "ResetEmail", emailMessage);
+
+            return View("/Views/Account/SendEmailSuccess.cshtml");
+            
+        }
+        public IActionResult ResetPassword(string username,string token)
+        {
+            if (string.IsNullOrEmpty(username)||string.IsNullOrEmpty(token))
+            {
+                return NotFound();
+            }
+
+         
+            ResetPasswordViewModel model = new ResetPasswordViewModel()
+            {
+                 UserName=username,
+                 Token=token,
+                 Password=""
+            };
+            return View(model);
+        }
+        [HttpPost]
+        public async Task<IActionResult> ResetPassword( [Bind("UserName,Token,Password")] ResetPasswordViewModel model)
+        {
+            var user = await _userManager.FindByNameAsync(model.UserName);
+            var result = await _userManager.ResetPasswordAsync(user, model.Token, model.Password);
+            return View("/Views/Account/ResetSuccess.cshtml");
+        }
+
+
     }
 }

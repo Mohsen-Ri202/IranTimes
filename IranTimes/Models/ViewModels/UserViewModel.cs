@@ -9,13 +9,13 @@ namespace NewShop
 {
     public class UserViewModel
     {
-        [Remote("IsExistUser", "Account",HttpMethod ="POST")]
+        [Remote("IsExistUser", "Account",HttpMethod ="POST",AdditionalFields = "__RequestVerificationToken")]
         [Display(Name = "نام کاربری")]
         [Required(ErrorMessage = "لطفا{0} را وارد کنید")]
         [MaxLength(150)]
         public string UserName { get; set; }
 
-        [Remote("IsExistEmail", "Account", HttpMethod = "POST")]
+        [Remote("IsExistEmail", "Account", HttpMethod = "POST",AdditionalFields ="__RequestVerificationToken")]
         [Display(Name = "ایمیل")]
         [Required(ErrorMessage = "لطفا{0} را وارد کنید")]
         [DataType(DataType.EmailAddress)]
