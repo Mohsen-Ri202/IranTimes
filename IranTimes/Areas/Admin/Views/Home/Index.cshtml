@@ -68,7 +68,6 @@
                     @Html.DisplayFor(modelItem => item.ShowInSlider)
                 </td>
                 <td>
-                    @*@Html.DisplayFor(modelItem => item.ImageName)*@
                     <img src="~/ImageFile/@item.ImageName" class="thumbnail" style="max-width:200px;max-height:150px" />
                 </td>
                 <td>
@@ -80,9 +79,7 @@
                 <td>
                 </td>
                 <td>
-                    @*<a class="btn btn-success" onclick="btnedite(@item.id)">وبرایش</a> |*@
                     <a class="btn btn-success" asp-action="Edit" asp-route-id="@item.id">وبرایش</a> |
-                    @*<a class="btn btn-info" onclick="btndetails(@item.id)" >اطلاعات</a> |*@
                     <a class="btn btn-info" asp-action="Details" asp-route-id="@item.id">اطلاعات</a> |
                     <a class="btn btn-danger" asp-action="Delete" asp-route-id="@item.id">حذف</a>
                 </td>

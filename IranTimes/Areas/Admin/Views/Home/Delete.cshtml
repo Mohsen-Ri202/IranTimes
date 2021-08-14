@@ -30,19 +30,12 @@
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.Text)
         </dd>
-       
-        @*<dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.ImageName)
-        </dt>*@
-        @*<dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.ImageName)
-        </dd>*@
+         
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.CreateDate)
         </dt>
         <dd class = "col-sm-10">
-            @*@Html.DisplayFor(model => model.CreateDate.ToShamsi())*@
-            @Model.CreateDate.ToShamsi();
+            @Model.CreateDate.ToShamsi()
         </dd>
        
     </dl>

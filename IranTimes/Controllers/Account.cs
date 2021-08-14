@@ -1,4 +1,5 @@
 ﻿using IranTimes;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
@@ -9,6 +10,7 @@ using System.Threading.Tasks;
 
 namespace NewShop.Controllers
 {
+    [Authorize(Roles ="Owner")]
     public class Account : Controller
     {
         private UserManager<IdentityUser> _userManager;
@@ -46,7 +48,8 @@ namespace NewShop.Controllers
                 var emailConfirmationToken = await _userManager.GenerateEmailConfirmationTokenAsync(user);
                 
                 var emailMessage = Url.Action("ConfirmEmail", "Account", new { username = user.UserName, token = emailConfirmationToken }
-                , Request.Scheme); 
+                , Request.Scheme);
+               
                 await _messageSender.SendEmailAsync(model.Email, "EmailConfirm", emailMessage);
                 return View("RegisterSuccess");
 
@@ -88,8 +91,6 @@ namespace NewShop.Controllers
             ModelState.AddModelError("","اطلاعات نا معتبر است");
             return View();
         }
-      [HttpPost]
-      [ValidateAntiForgeryToken]
         public async Task<IActionResult> LogOut()
         {
             await _signInManager.SignOutAsync();

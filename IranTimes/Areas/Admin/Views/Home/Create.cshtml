@@ -1,4 +1,5 @@
-﻿@model NewShop.Page
+﻿@*@model NewShop.Page*@
+@model IranTimes.Models.CreateViewModel
 @{
     ViewData["Title"] = "Create";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -37,8 +38,15 @@
                 <input type="file" name="ImgUp" />
             </div>
 
-        
-            @await Component.InvokeAsync("DropDown")
+        <select asp-for="PageGroupId">
+            @foreach (var item in Model.PageGroups)
+            {
+                <option value="@item.Id">
+                    @item.GroupName
+                </option>
+            }
+        </select>
+
             <div class="form-group">
                 <input type="submit" value="ثبت" class="btn btn-success" />
             </div>

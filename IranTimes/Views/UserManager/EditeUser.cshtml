@@ -1,0 +1,17 @@
+﻿@model IranTimes.IdentityUserViewModel
+@{ 
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<h3>ویرایش کاربر</h3>
+<br />
+<form asp-action="EditeUser" method="post">
+<div asp-validation-summary="ModelOnly"/>
+
+    <div class="form-group">
+        <label class="control-label" asp-for="Name"></label>
+        <input class="form-control" asp-for="Name"/>
+        <span asp-validation-for="Name"></span>
+    </div>
+    <input type="hidden" asp-for="Id" />
+    <button class="btn btn-success" type="submit">ذخیره</button>
+</form>

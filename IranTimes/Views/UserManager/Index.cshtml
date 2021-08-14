@@ -1,0 +1,41 @@
+﻿@model List<IranTimes.Models.IndexViewModel>
+
+@{
+    ViewData["Title"] = "مدیریت کاربران";
+
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+    if (!Model.Any())
+    {
+        <h4>کاربری یافت نشد</h4>
+    }
+    else
+    {
+
+        <h3>لیست کاربران</h3>
+
+
+        foreach (var item in Model)
+        {
+
+        
+            <div class="card mt-2">
+                <div class="card-header">
+                    نام کاربر : <b>@item.UserName</b>
+                </div>
+                <div class="card-body">
+                    ایمیل : <b>@item.Email</b> 
+                </div>
+                <div class="card-footer">
+                    <form asp-action="DeleteUser" asp-route-id="@item.Id" method="post">
+                        <a asp-action="EditeUser" asp-route-id="@item.Id" class="btn btn-primary">ویرایش کاربر</a> |
+                        <a asp-action="AddUserToRole" asp-route-id="@item.Id" class="btn btn-success">افزودن مقام به کاربر</a> |
+                        <a asp-action="RemoveUserFromRole" asp-route-id="@item.Id" class="btn btn-warning" >حذف مقام کاربر</a> |
+                        <button class="btn btn-danger" type="submit">حذف کاربر</button>
+                    </form>
+                </div>
+            </div>
+
+        }
+    }
+}

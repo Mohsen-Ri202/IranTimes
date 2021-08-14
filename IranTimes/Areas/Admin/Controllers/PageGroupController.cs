@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using NewShop.Models;
@@ -10,6 +11,7 @@ using System.Threading.Tasks;
 namespace NewShop.Areas
 {
     [Area("Admin")]
+    [Authorize(Roles = "Admin")]
     public class PageGroupController : Controller
     {
         private IPageGroupRepository _pageGroupRepository;

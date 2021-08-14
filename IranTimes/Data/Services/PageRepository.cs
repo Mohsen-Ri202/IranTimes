@@ -15,7 +15,7 @@ namespace NewShop
         }
         public List<Page> GetAllPages()
         {
-            return _context.Pages.Include(x => x.PageGroup).ToList();
+            return _context.Pages.Include(x => x.PageGroup).OrderByDescending(o => o.CreateDate).ToList();
         }
         public void Insert(Page page)
         {

@@ -1,0 +1,43 @@
+﻿@model IEnumerable<Microsoft.AspNetCore.Identity.IdentityRole>
+
+@{
+    ViewData["Title"] = "لیست مقام ها";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<p>
+    <a asp-action="AddRoles">ایجاد مقام جدید</a>
+</p>
+
+@{ 
+    if (!Model.Any())
+    {
+        <h3>مقامی یافت نشد</h3>
+    }
+}
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                مقام ها
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                <form asp-action="DeleteRole" asp-route-id="@item.Id" method="post">
+                    <a class="btn btn-warning" asp-action="EditeRole" asp-route-Id="@item.Id">Edit</a> |
+                    <input value="Delete" type="submit" class="btn btn-danger"/>
+                </form>
+             </td>
+        </tr>
+}
+    </tbody>
+</table>

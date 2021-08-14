@@ -6,6 +6,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using NewShop;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using IranTimes;
 
 namespace NewShop
 {
@@ -32,5 +33,6 @@ namespace NewShop
                     });
 
         }
+        public DbSet<IranTimes.RoleViewModel> RoleViewModel { get; set; }
     }
 }

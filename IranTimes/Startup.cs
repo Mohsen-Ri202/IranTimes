@@ -9,7 +9,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-
+using WebMarkupMin.AspNetCore3;
 
 namespace NewShop
 {
@@ -25,7 +25,18 @@ namespace NewShop
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            #region WebMarkup
+            services.AddWebMarkupMin(options =>
+            {
+                options.AllowCompressionInDevelopmentEnvironment = true;
+                options.AllowMinificationInDevelopmentEnvironment = true;
+            })
+              .AddHtmlMinification()
+              .AddHttpCompression();
+            #endregion
+
             services.AddControllersWithViews();
+
             #region Connection String      
             services.AddDbContext<NewCmsContext>(options => {
                 options.UseSqlServer(Configuration.GetConnectionString("ConnectionString"));
@@ -65,7 +76,7 @@ namespace NewShop
             }
            
             app.UseStaticFiles();
-
+            app.UseWebMarkupMin();
             app.UseRouting();
             app.UseAuthentication();
             app.UseAuthorization();

@@ -9,16 +9,21 @@ using NewShop;
 using System.IO;
 using System.ComponentModel;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Authorization;
+using IranTimes.Models;
+
 namespace NewShop.Areas
 {
     [Area("Admin")]
+    [Authorize(Roles = "Admin")]
+    [Authorize(Roles = "Owner")]
     public class HomeController : Controller
     {
         private readonly NewCmsContext _context;
         private IPageRepository _pageRepository;
         private IPageGroupRepository _pageGroupRepository;
         public HomeController(NewCmsContext context, IPageRepository pageRepository
-        ,IPageGroupRepository pageGroupRepository)
+        , IPageGroupRepository pageGroupRepository)
         {
 
             _pageGroupRepository = pageGroupRepository;
@@ -26,6 +31,7 @@ namespace NewShop.Areas
             _pageRepository = pageRepository;
         }
 
+        [AllowAnonymous]
         // GET: PagesController.cs/Pages
         public IActionResult Index()
         {
@@ -54,8 +60,9 @@ namespace NewShop.Areas
 
         public IActionResult Create()
         {
-             
-            return View();
+            var groups = _pageGroupRepository.GetAllGroups();
+            CreateViewModel model = new CreateViewModel() { PageGroups = groups };
+            return View(model);
         }
 
         // POST: PagesController.cs/Pages/Create
@@ -63,7 +70,7 @@ namespace NewShop.Areas
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create([Bind("id,Title,PageGroupId,ShortDescription,Text,Visit,ShowInSlider,ImageName,CreateDate")] Page page , IFormFile ImgUp)
+        public IActionResult Create([Bind("id,Title,PageGroupId,ShortDescription,Text,Visit,ShowInSlider,ImageName,CreateDate")] CreateViewModel model, IFormFile ImgUp)
         {
             if (ModelState.IsValid)
             {
@@ -76,16 +83,27 @@ namespace NewShop.Areas
                         ImgUp.CopyTo(FileStream);
 
                     }
-                    page.ImageName = FileName;
+                    model.ImageName = FileName;
                 }
+                model.CreateDate = DateTime.Now;
 
-                page.CreateDate = DateTime.Now;
+                Page page = new Page()
+                {
+                    ImageName = model.ImageName,
+                    PageGroupId = model.PageGroupId,
+                    ShortDescription = model.ShortDescription,
+                    ShowInSlider = model.ShowInSlider,
+                    Text = model.Text,
+                    Title = model.Title,
+                    CreateDate = model.CreateDate,
+                };
+
                 _pageRepository.Insert(page);
                 _pageRepository.Save();
                 return RedirectToAction(nameof(Index));
             }
-                return View(page);
-            }
+            return View(model);
+        }
 
         // GET: PagesController.cs/Pages/Edit/5
         public IActionResult Edit(int? id)
@@ -108,7 +126,7 @@ namespace NewShop.Areas
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Edit(int id, [Bind("id,Title,PageGroupId,ShortDescription,Text,Visit,ShowInSlider,ImageName,CreateDate")] Page page, IFormFile ImgUp )
+        public IActionResult Edit(int id, [Bind("id,Title,PageGroupId,ShortDescription,Text,Visit,ShowInSlider,ImageName,CreateDate")] Page page, IFormFile ImgUp)
         {
             if (id != page.id)
             {
@@ -168,7 +186,7 @@ namespace NewShop.Areas
                 }
             }
             _pageRepository.PageDelete(page);
-           
+
             if (page == null)
             {
                 return NotFound();
@@ -191,6 +209,6 @@ namespace NewShop.Areas
         {
             return _context.Pages.Any(e => e.id == id);
         }
-     
+
     }
 }
