@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Caching.Memory;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,13 +10,22 @@ namespace NewShop
     public class PageRepository : IPageRepository
     {
         private NewCmsContext _context;
-        public PageRepository(NewCmsContext context)
+        private IMemoryCache _cache;
+        public PageRepository(NewCmsContext context, IMemoryCache cache)
         {
             _context = context;
+            _cache = cache;
         }
         public List<Page> GetAllPages()
         {
-            return _context.Pages.Include(x => x.PageGroup).OrderByDescending(o => o.CreateDate).ToList();
+            List<Page> pages;
+            if (!_cache.TryGetValue("", out pages))
+            {
+                 pages = _context.Pages.Include(x => x.PageGroup).OrderByDescending(o => o.CreateDate).ToList();
+
+            _cache.Set("", pages, TimeSpan.FromMinutes(2));
+        }
+            return pages;
         }
         public void Insert(Page page)
         {

@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.Logging;
 using NewShop.Models;
 using System;
@@ -16,11 +17,16 @@ namespace NewShop.Controllers
         private readonly ILogger<HomeController> _logger;
         private IPageRepository _pagerepository;
         private NewCmsContext _Context;
-        public HomeController(ILogger<HomeController> logger,NewCmsContext context,IPageRepository pageRepository)
+        private IMemoryCache _cache;
+        public HomeController(ILogger<HomeController> logger,
+            NewCmsContext context,
+            IPageRepository pageRepository,
+            IMemoryCache cache)
         {
             _logger = logger;
             _Context = context;
             _pagerepository = pageRepository;
+            _cache = cache;
         }
 
         public IActionResult Index(int pageid=1)

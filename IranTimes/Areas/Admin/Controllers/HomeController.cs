@@ -11,6 +11,7 @@ using System.ComponentModel;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Authorization;
 using IranTimes.Models;
+using Microsoft.Extensions.Caching.Memory;
 
 namespace NewShop.Areas
 {
@@ -21,14 +22,14 @@ namespace NewShop.Areas
     {
         private readonly NewCmsContext _context;
         private IPageRepository _pageRepository;
-        private IPageGroupRepository _pageGroupRepository;
+        private IPageGroupRepository _pageGroupRepository;      
         public HomeController(NewCmsContext context, IPageRepository pageRepository
         , IPageGroupRepository pageGroupRepository)
         {
 
             _pageGroupRepository = pageGroupRepository;
             _context = context;
-            _pageRepository = pageRepository;
+            _pageRepository = pageRepository;        
         }
 
         [AllowAnonymous]

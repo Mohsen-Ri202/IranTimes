@@ -10,7 +10,6 @@ using System.Threading.Tasks;
 
 namespace NewShop.Controllers
 {
-    [Authorize(Roles ="Owner")]
     public class Account : Controller
     {
         private UserManager<IdentityUser> _userManager;
@@ -63,11 +62,11 @@ namespace NewShop.Controllers
         [HttpGet]
         public IActionResult Login()
         {
-            if (_signInManager.IsSignedIn(User))
+            if (  _signInManager.IsSignedIn(User))
             {
                 return RedirectToAction("Index");
             }
-            return View();
+            return  View();
         } 
         [HttpPost]
         public async Task<IActionResult> Login( LoginViewModel model)
@@ -164,9 +163,9 @@ namespace NewShop.Controllers
             var emailMessage = Url.Action("ResetPassword", "Account", new { username = user.UserName, token = resetPasswordToken }
             , Request.Scheme);
             await _messageSender.SendEmailAsync(email, "ResetEmail", emailMessage);
-
+            //return null;
             return View("/Views/Account/SendEmailSuccess.cshtml");
-            
+
         }
         public IActionResult ResetPassword(string username,string token)
         {
