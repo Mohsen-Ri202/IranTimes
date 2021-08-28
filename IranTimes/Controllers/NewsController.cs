@@ -37,16 +37,11 @@ namespace NewShop
                     WebSite = website,
                     PageID = id,
                     CreateDate = DateTime.Now
-                };
+                }; 
                 _commentrepository.AddComment(newcomment);
                 _commentrepository.Save();
             return Json(newcomment);       
         }
      
-       public IActionResult NestedComment()
-        {
-
-            return null;
-        }
     }
 }

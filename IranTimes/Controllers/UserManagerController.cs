@@ -15,14 +15,15 @@ namespace IranTimes.Controllers
     {
         private RoleManager<IdentityRole> _roleManager;
         private UserManager<IdentityUser> _userManager;
-        public UserManagerController(RoleManager<IdentityRole> roleManager , 
+        public UserManagerController(
+            RoleManager<IdentityRole> roleManager , 
             UserManager<IdentityUser> userManager)
            
         {
             _roleManager = roleManager;
             _userManager = userManager;
         }
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
 
             var model = _userManager.Users.Select( s => new IndexViewModel()
@@ -32,7 +33,16 @@ namespace IranTimes.Controllers
                 Email = s.Email,
               
             }).ToList();
-           
+
+            foreach (var item in model)
+            {
+                var user = await _userManager.FindByEmailAsync(item.Email);
+                var role = await _userManager.GetRolesAsync(user);
+                
+                item.RoleName=role;
+            }
+                
+            
             return View(model);
         }
         [HttpGet]

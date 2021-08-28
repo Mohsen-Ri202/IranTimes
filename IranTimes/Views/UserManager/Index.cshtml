@@ -1,4 +1,4 @@
-﻿@model List<IranTimes.Models.IndexViewModel>
+﻿@model IEnumerable<IranTimes.Models.IndexViewModel>
 
 @{
     ViewData["Title"] = "مدیریت کاربران";
@@ -18,14 +18,24 @@
         foreach (var item in Model)
         {
 
-        
+      
+           var p = item.RoleName.Count();
+           
             <div class="card mt-2">
                 <div class="card-header">
                     نام کاربر : <b>@item.UserName</b>
                 </div>
                 <div class="card-body">
-                    ایمیل : <b>@item.Email</b> 
+                    ایمیل : <b>@item.Email</b>
+                    <br />
+                    مقام  :
+                    @foreach (var role in item.RoleName)
+                    {               
+                         <b>@role .</b>
+                    }
+
                 </div>
+                
                 <div class="card-footer">
                     <form asp-action="DeleteUser" asp-route-id="@item.Id" method="post">
                         <a asp-action="EditeUser" asp-route-id="@item.Id" class="btn btn-primary">ویرایش کاربر</a> |

@@ -1,46 +1,43 @@
-﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.Logging;
 using NewShop.Models;
-using System;
-using System.Collections.Generic;
+
 using System.Diagnostics;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace NewShop.Controllers
 {
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-        private IPageRepository _pagerepository;
-        private NewCmsContext _Context;
-        private IMemoryCache _cache;
+        private readonly IPageRepository _pageRepository;
+        private readonly NewCmsContext _context;
+        private readonly IMemoryCache _cache;
         public HomeController(ILogger<HomeController> logger,
             NewCmsContext context,
             IPageRepository pageRepository,
             IMemoryCache cache)
         {
             _logger = logger;
-            _Context = context;
-            _pagerepository = pageRepository;
+            _context = context;
+            _pageRepository = pageRepository;
             _cache = cache;
         }
 
         public IActionResult Index(int pageid=1)
         {           
             int skip = (pageid - 1) * 3;
-            int count = _Context.Pages.Count();
+            int count = _context.Pages.Count();
             ViewBag.PageCount = count/3;
             ViewBag.PageId = pageid;
             ViewBag.next = pageid += 1;
-            var model = _Context.Pages.Include(i=>i.PageGroup)
-                .OrderByDescending(o=>o.CreateDate)
-                .Skip(skip)
-                .Take(3);
+            var model = _pageRepository.GetAllPages()
+             .Skip(skip)
+             .Take(3);     
             return View(model);
+        
         }
 
         public IActionResult Privacy()

@@ -1,17 +1,17 @@
-﻿    
-      @*@inject UserManager<IdentityUser> _userManager;
-      @inject RoleManager<IdentityRole> roleManager;*@
-
+﻿
  <!DOCTYPE html>
     <html lang="en">
     <head>
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>@ViewData["Title"] - NewShop</title>
+        <title>@ViewData["Title"] - IranTimes</title>
+        <script src="/js/jquery-1.11.1.min.js"></script>
         <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
         <link rel="stylesheet" href="~/css/site.css" />
-        <script src="~/js/bootstrap.min.js"></script>
+        <script src="/js/bootstrap.min.js"></script>
         <link href="~/css/bootstrap-rtl.css" rel="stylesheet" />
+        <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
+
     </head>
     <body class="rtl">
         <header>
@@ -24,7 +24,7 @@
                     <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
                         <ul class="navbar-nav flex-grow-1">
                             <li class="nav-item">
-                                <a class="nav-link text-dark , navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">خانه</a>
+                                <a class="btn btn-light" asp-area="" asp-controller="Home" asp-action="Index">خانه</a>
                             </li>
                             @{ if (User.IsInRole("Owner"))
                                 {

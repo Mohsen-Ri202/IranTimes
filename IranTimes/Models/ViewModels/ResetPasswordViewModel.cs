@@ -7,6 +7,8 @@ namespace IranTimes
 {
     public class ResetPasswordViewModel
     {
+        [Required]
+        [Display(Name ="نام کاربری")]
         public string UserName { get; set; }
         public string Token { get; set; }
         [Required]

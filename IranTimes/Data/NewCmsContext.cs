@@ -27,11 +27,8 @@ namespace NewShop
                 .Entity<Createmodel>(
                     eb =>
                     {
-                        eb.HasNoKey();
-                      
-                       
+                        eb.HasNoKey();                                     
                     });
-
         }
         public DbSet<IranTimes.RoleViewModel> RoleViewModel { get; set; }
     }

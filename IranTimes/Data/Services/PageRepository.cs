@@ -9,8 +9,8 @@ namespace NewShop
 {
     public class PageRepository : IPageRepository
     {
-        private NewCmsContext _context;
-        private IMemoryCache _cache;
+        private readonly NewCmsContext _context;
+        private readonly IMemoryCache _cache;
         public PageRepository(NewCmsContext context, IMemoryCache cache)
         {
             _context = context;
