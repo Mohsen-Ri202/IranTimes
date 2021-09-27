@@ -1,10 +1,8 @@
-﻿@*@{
-        ViewData["Title"] = "View";
-    }*@
+﻿@using IranTimes.Models; 
 @using Microsoft.AspNetCore.Identity;
 
-@inject UserManager<IdentityUser> _userManager;
-@inject SignInManager<IdentityUser> _signInManager;
+@inject UserManager<ApplicationUser> _userManager;
+@inject SignInManager<ApplicationUser> _signInManager;
 <!DOCTYPE HTML>
 <html>
 <head>
@@ -50,9 +48,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                         <nav class="link-effect-7" id="link-effect-7">
                             <ul class="nav navbar-nav">
                                 <li class="active act"><a asp-controller="Home" asp-action="Index">صفحه اصلی</a></li>
-                                <li><a asp-action="AboutUs">درباره ما</a></li>
-                                <li><a href="features.html">امکانات</a></li>
-                                <li><a href="fashion.html">جزییات</a></li>
+                                <li><a asp-action="AboutUs">درباره ما</a></li>                           
                                 <li><a asp-action="ContactUs">تماس با ما</a></li>
                             </ul>
                         </nav>
@@ -104,7 +100,6 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                     @RenderBody()
                 </div>
             </div>
-            @*@RenderSection("News",required:false)*@
             <!-- technology-left -->
             <div class="col-md-3 technology-left">
 
