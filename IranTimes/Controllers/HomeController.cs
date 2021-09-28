@@ -6,6 +6,11 @@ using NewShop.Models;
 
 using System.Diagnostics;
 using System.Linq;
+using System.Security.Claims;
+using ZarinpalSandbox;
+using ZarinPal;
+using IranTimes.Models;
+using System.Threading.Tasks;
 
 namespace NewShop.Controllers
 {
@@ -75,25 +80,24 @@ namespace NewShop.Controllers
             {
                 return Redirect("https://sandbox.zarinpal.com/pg/StartPay/" + result.Result.Authority);
             }
-            else
-            {
-                return BadRequest();
-            }          
+            else return BadRequest();           
         }
-       
-        public IActionResult OnlinePayment(string userId)
+        public async Task<IActionResult> OnlinePayment(string userId)
         {
+
             if (HttpContext.Request.Query["Status"]!=""&&
                 HttpContext.Request.Query["Status"].ToString().ToLower()=="ok" &&
                 HttpContext.Request.Query["Authority"] !="")
             {
                 string authority = HttpContext.Request.Query["Authority"].ToString();
-                var user = _userManager.FindByIdAsync(userId);
+                var user = await _userManager.FindByIdAsync(userId.ToString());
+                
                 var payment = new Payment(1500);
                 var result = payment.Verification(authority).Result;
                 if (result.Status==100)
                 {
-                    user.Result.IsPayed = true;
+                   
+                    user.IsPayed = true;
                     return RedirectToAction("/");
                 }
 

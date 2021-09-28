@@ -50,7 +50,8 @@ namespace IranTimes.Controllers
         {
             if (string.IsNullOrEmpty(id)) return NotFound();
             var user = await _userManager.FindByIdAsync(id);
-            if(user==null) return NotFound();
+            
+            if (user == null) return NotFound();
             IdentityUserViewModel model = new IdentityUserViewModel()
             {
                 Id = user.Id,

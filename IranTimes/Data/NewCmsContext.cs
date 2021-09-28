@@ -29,7 +29,18 @@ namespace NewShop
                     {
                         eb.HasNoKey();                                     
                     });
+<<<<<<< Updated upstream
         }
+=======
+            modelBuilder.Entity<IdentityUser>()
+                .HasDiscriminator<int>("Type")
+                .HasValue<IdentityUser>(0)
+                .HasValue<ApplicationUser>(1);
+
+            modelBuilder.Entity<IdentityUser>().ToTable("AspNetUsers");
+          
+        } 
+>>>>>>> Stashed changes
         public DbSet<IranTimes.RoleViewModel> RoleViewModel { get; set; }
     }
 }
