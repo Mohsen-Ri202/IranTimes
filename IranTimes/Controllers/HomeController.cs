@@ -80,9 +80,13 @@ namespace NewShop.Controllers
             {
                 return Redirect("https://sandbox.zarinpal.com/pg/StartPay/" + result.Result.Authority);
             }
-            else return BadRequest();           
+            else
+            {
+                return BadRequest();
+            }          
         }
-        public async Task<IActionResult> OnlinePayment(string userId)
+       
+        public IActionResult OnlinePayment(string userId)
         {
 
             if (HttpContext.Request.Query["Status"]!=""&&
