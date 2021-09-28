@@ -62,5 +62,46 @@ namespace NewShop.Controllers
         {
             return View();
         }
+        public IActionResult Payment()
+        {
+            var price = 1500;
+            var userName = User.FindFirstValue(ClaimTypes.Name);
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var email = User.FindFirstValue(ClaimTypes.Email);           
+            if (userName == null) return NotFound();
+            var payment = new Payment(price);
+            var result = payment.PaymentRequest($"پرداخت حق اشتراک{userName}", "http://localhost:10612/Home/OnlinePayment/" + userId, email, "09904848916");
+            if (result.Result.Status == 100)
+            {
+                return Redirect("https://sandbox.zarinpal.com/pg/StartPay/" + result.Result.Authority);
+            }
+            else
+            {
+                return BadRequest();
+            }          
+        }
+       
+        public IActionResult OnlinePayment(string userId)
+        {
+            if (HttpContext.Request.Query["Status"]!=""&&
+                HttpContext.Request.Query["Status"].ToString().ToLower()=="ok" &&
+                HttpContext.Request.Query["Authority"] !="")
+            {
+                string authority = HttpContext.Request.Query["Authority"].ToString();
+                var user = _userManager.FindByIdAsync(userId);
+                var payment = new Payment(1500);
+                var result = payment.Verification(authority).Result;
+                if (result.Status==100)
+                {
+                    user.Result.IsPayed = true;
+                    return RedirectToAction("/");
+                }
+
+                return NotFound();
+
+            }
+            return RedirectToAction("/");
+        }
+    
     }
 }

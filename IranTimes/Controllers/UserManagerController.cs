@@ -13,12 +13,12 @@ namespace IranTimes.Controllers
     [Authorize(Roles = "Owner")]
     public class UserManagerController : Controller
     {
-        private RoleManager<IdentityRole> _roleManager;
-        private UserManager<IdentityUser> _userManager;
-        public UserManagerController(
-            RoleManager<IdentityRole> roleManager , 
-            UserManager<IdentityUser> userManager)
-           
+        private readonly RoleManager<IdentityRole> _roleManager;
+        private readonly UserManager<ApplicationUser> _userManager;
+
+        public UserManagerController
+            (RoleManager<IdentityRole> roleManager,
+            UserManager<ApplicationUser> userManager)
         {
             _roleManager = roleManager;
             _userManager = userManager;
