@@ -1,7 +1,5 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.Logging;
 using NewShop.Models;
 using System.Diagnostics;
@@ -10,6 +8,8 @@ using System.Security.Claims;
 using ZarinpalSandbox;
 using ZarinPal;
 using IranTimes.Models;
+using System;
+using System.Threading.Tasks;
 
 namespace NewShop.Controllers
 {
@@ -71,7 +71,7 @@ namespace NewShop.Controllers
         }
         public IActionResult Payment()
         {
-            var price = 1500;
+            var price = 15000;
             var userName = User.FindFirstValue(ClaimTypes.Name);
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
             var email = User.FindFirstValue(ClaimTypes.Email);           
@@ -81,26 +81,29 @@ namespace NewShop.Controllers
             if (result.Result.Status == 100) return Redirect("https://sandbox.zarinpal.com/pg/StartPay/" + result.Result.Authority);
             else return BadRequest();           
         }
-        public IActionResult OnlinePayment(string userId)
+        [Route("Home/OnlinePayment/{userId:guid}")]
+        public async Task<IActionResult> OnlinePayment(string userId)
         {
+            if (userId==null) return NotFound();
+
             if (HttpContext.Request.Query["Status"]!=""&&
                 HttpContext.Request.Query["Status"].ToString().ToLower()=="ok" &&
                 HttpContext.Request.Query["Authority"] !="")
             {
                 string authority = HttpContext.Request.Query["Authority"].ToString();
-                var user = _userManager.FindByIdAsync(userId);
-                var payment = new Payment(1500);
+                var user = await _userManager.FindByIdAsync(userId);
+                var payment = new Payment(15000);
                 var result = payment.Verification(authority).Result;
                 if (result.Status==100)
                 {
-                    user.Result.IsPayed = true;
-                    return RedirectToAction("/");
-                }
-
+                    user.IsPayed = true;
+                   await _userManager.UpdateAsync(user);               
+                    return View("PaymentSuccess");
+                }    
                 return NotFound();
-
             }
-            return RedirectToAction("/");
+         
+            return View("PaymentFaild");
         }
     
     }
