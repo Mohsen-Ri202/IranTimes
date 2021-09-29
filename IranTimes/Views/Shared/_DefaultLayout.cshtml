@@ -1,8 +1,9 @@
-﻿@using IranTimes.Models; 
+﻿@using IranTimes.Models;
 @using Microsoft.AspNetCore.Identity;
-
+@using System.Security.Claims;
 @inject UserManager<ApplicationUser> _userManager;
 @inject SignInManager<ApplicationUser> _signInManager;
+
 <!DOCTYPE HTML>
 <html>
 <head>
@@ -30,7 +31,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <body>
     <div class="header" id="ban">
         <div class="container">
-            
+
             <div class="header_left wow fadeInRight animated animated animated" data-wow-delay=".5s" style="visibility: visible; animation-delay: 0.5s; animation-name: fadeInRight;">
                 <nav class="navbar navbar-default">
                     <!-- Brand and toggle get grouped for better mobile display -->
@@ -48,7 +49,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                         <nav class="link-effect-7" id="link-effect-7">
                             <ul class="nav navbar-nav">
                                 <li class="active act"><a asp-controller="Home" asp-action="Index">صفحه اصلی</a></li>
-                                <li><a asp-action="AboutUs">درباره ما</a></li>                           
+                                <li><a asp-action="AboutUs">درباره ما</a></li>
                                 <li><a asp-action="ContactUs">تماس با ما</a></li>
                             </ul>
                         </nav>
@@ -56,17 +57,23 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                     <!-- /.navbar-collapse -->
                 </nav>
             </div>
-         
-            @if (_signInManager.IsSignedIn(User))
+            @{ 
+                var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+                var user = await _userManager.FindByIdAsync(userId);
+            }
+            @if (user != null)
             {
-                <div style="display:flex;margin-right:20px;margin-top:10px;justify-content:left"> <p>  @User.Identity.Name  عزیز خوش آمدید / <a asp-area="Admin" asp-controller="Home" asp-action="Index">پنل ادمین</a> / <a asp-controller="Account" asp-action="LogOut">خروج</a></p></div>
-                              
+          
+            {
+                <div style="display:flex;margin-right:20px;margin-top:10px;justify-content:left"> <p>  @User.Identity.Name  عزیز خوش آمدید / @if ((user.IsPayed == true)) {<a asp-area = "Admin" asp-controller = "Home" asp-action = "Index" > پنل ادمین </a>} / <a asp-controller="Account" asp-action="LogOut">خروج</a></p></div>
+
+                }
             }
             else
             {
-                
-        <div style="display:flex;margin-right:30px;margin-top:10px;justify-content:left"><a asp-controller="Account" asp-action="Login">ورود</a>/<a asp-controller="Account" asp-action="Register">ثبت نام</a></div>
-           
+
+                <div style="display:flex;margin-right:30px;margin-top:10px;justify-content:left"><a asp-controller="Account" asp-action="Login">ورود</a>/<a asp-controller="Account" asp-action="Register">ثبت نام</a></div>
+
             }
             <div class="clearfix"> </div>
         </div>
@@ -137,7 +144,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 
                         <p>ما را در اینستاگرام و توییتر دنبال کنید تا از جدید ترین اخبار مطلع شوید </p>
                         <div class="mediaicon">
-                            <a href="http://twitter.com" class="fa fa-twitter" style="width:20px;" ></a>
+                            <a href="http://twitter.com" class="fa fa-twitter" style="width:20px;"></a>
                             <a href="http://instagram.com" class="fa fa-instagram" style="width: 20px; margin: auto"></a>
                             <div class="twt">
                             </div>

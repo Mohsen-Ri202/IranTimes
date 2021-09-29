@@ -26,12 +26,13 @@
                             <li class="nav-item">
                                 <a class="btn btn-light" asp-area="" asp-controller="Home" asp-action="Index">خانه</a>
                             </li>
-                            @*@{ if (User.IsInRole("Owner"))
-                                {*@
+                            @{ if (User.IsInRole("Owner"))
+                                {
                                     <li><a class="btn btn-light" asp-area="" asp-controller="UserManager" asp-action="Index">مدیریت کاربران</a></li>
                                     <li><a class="btn btn-light" asp-area="" asp-controller="RoleManager" asp-action="Index">مدیریت مقام ها</a></li>
-                                @*} }*@
-                           
+                                } }
+                         
+
                         </ul>
                     </div>
                 </div>

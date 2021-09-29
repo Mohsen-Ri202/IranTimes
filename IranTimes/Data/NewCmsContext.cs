@@ -33,9 +33,7 @@ namespace NewShop
                 .HasValue<ApplicationUser>(1);
 
             modelBuilder.Entity<IdentityUser>().ToTable("AspNetUsers");
-            //modelBuilder.Entity<ApplicationUser>()
-            //    .Property(p => p.IsPayed)
-            //    .HasDefaultValue(false);       
+            
         } 
         public DbSet<IranTimes.RoleViewModel> RoleViewModel { get; set; }
     }
