@@ -8,12 +8,12 @@ namespace NewShop.Controllers
 {
     public class AccountController : Controller
     {
-        private readonly UserManager<IdentityUser> _userManager;
-        private readonly SignInManager<IdentityUser> _signInManager;
+        private readonly UserManager<ApplicationUser> _userManager;
+        private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly IMessageSender _messageSender;
         public AccountController(
-            UserManager<IdentityUser> userManager,
-            SignInManager<IdentityUser> signInManager,
+            UserManager<ApplicationUser> userManager,
+            SignInManager<ApplicationUser> signInManager,
             IMessageSender messageSender)
         {
             _userManager = userManager;
@@ -32,7 +32,7 @@ namespace NewShop.Controllers
         [HttpPost]
         public async Task<IActionResult> Register([Bind("UserName,Email,Password,RePassword")] UserViewModel model)
         {
-            var user = new IdentityUser()
+            var user = new ApplicationUser()
             {
                UserName=model.UserName,
                Email=model.Email,            
@@ -144,7 +144,7 @@ namespace NewShop.Controllers
             if (ModelState.IsValid)
             {
 
-                
+            
                 var user = await _userManager.FindByEmailAsync(model.Email);
 
                 if (user == null)

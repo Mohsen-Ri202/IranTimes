@@ -15,7 +15,7 @@ namespace NewShop
         }
         public async Task<IViewComponentResult> InvokeAsync(Page page)
         {
-            var model = _commentRepository.GetCommentById(page.id);
+            var model =  _commentRepository.GetCommentById(page.id);
             return View(model);
 
         }

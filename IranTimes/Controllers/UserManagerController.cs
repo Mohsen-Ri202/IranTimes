@@ -13,8 +13,8 @@ namespace IranTimes.Controllers
     [Authorize(Roles = "Owner")]
     public class UserManagerController : Controller
     {
-        private readonly RoleManager<IdentityRole> _roleManager;
-        private readonly UserManager<ApplicationUser> _userManager;
+        private RoleManager<IdentityRole> _roleManager;
+        private UserManager<ApplicationUser> _userManager;
 
         public UserManagerController
             (RoleManager<IdentityRole> roleManager,
@@ -26,23 +26,23 @@ namespace IranTimes.Controllers
         public async Task<IActionResult> Index()
         {
 
-            var model = _userManager.Users.Select( s => new IndexViewModel()
+            var model = _userManager.Users.Select(s => new IndexViewModel()
             {
                 Id = s.Id,
                 UserName = s.UserName,
                 Email = s.Email,
-              
+
             }).ToList();
 
             foreach (var item in model)
             {
                 var user = await _userManager.FindByEmailAsync(item.Email);
                 var role = await _userManager.GetRolesAsync(user);
-                
-                item.RoleName=role;
+
+                item.RoleName = role;
             }
-                
-            
+
+
             return View(model);
         }
         [HttpGet]
@@ -50,7 +50,6 @@ namespace IranTimes.Controllers
         {
             if (string.IsNullOrEmpty(id)) return NotFound();
             var user = await _userManager.FindByIdAsync(id);
-            
             if (user == null) return NotFound();
             IdentityUserViewModel model = new IdentityUserViewModel()
             {
@@ -72,8 +71,8 @@ namespace IranTimes.Controllers
             if (user == null) return NotFound();
             user.UserName = model.Name;
 
-         var result=  await _userManager.UpdateAsync(user);
-            if(result.Succeeded) return RedirectToAction("Index");
+            var result = await _userManager.UpdateAsync(user);
+            if (result.Succeeded) return RedirectToAction("Index");
 
             foreach (var error in result.Errors)
             {
@@ -90,25 +89,27 @@ namespace IranTimes.Controllers
             var rols = _roleManager.Roles.ToList();
             var userrole = await _userManager.GetRolesAsync(user);
             var valid = rols.Where(w => !userrole.Contains(w.Name)).ToList();
-            var model= new AddUserToRoleViewModel()
-            {           
-                Id=id
+
+            var model = new AddUserToRoleViewModel()
+            {
+                Id = id
             };
             foreach (var role in valid)
             {
-                    model.UserRoleNames.Add(new UserRoleName() { 
-                         RoleName=role.Name
-                    });                           
+                model.UserRoleNames.Add(new UserRoleName()
+                {
+                    RoleName = role.Name
+                });
             }
 
-           
+
             return View(model);
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> AddUserToRole(AddUserToRoleViewModel model)
         {
-          
+
             if (model == null) return NotFound();
             var user = await _userManager.FindByIdAsync(model.Id);
             if (user == null) return NotFound();
@@ -117,7 +118,7 @@ namespace IranTimes.Controllers
                 .Select(s => s.RoleName)
                 .ToList();
 
-            var result = await _userManager.AddToRolesAsync(user,rolerequest);
+            var result = await _userManager.AddToRolesAsync(user, rolerequest);
             if (result.Succeeded)
             {
                 return RedirectToAction("Index");
@@ -128,9 +129,9 @@ namespace IranTimes.Controllers
             }
             return View(model);
         }
-       
+
         [HttpGet]
-        public async Task<IActionResult> RemoveUserFromRole(string  id)
+        public async Task<IActionResult> RemoveUserFromRole(string id)
         {
             if (string.IsNullOrEmpty(id)) return NotFound();
             var user = await _userManager.FindByIdAsync(id);
@@ -149,7 +150,7 @@ namespace IranTimes.Controllers
             }
             return View(model);
         }
-  
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> RemoveUserFromRole(AddUserToRoleViewModel model)
@@ -181,10 +182,10 @@ namespace IranTimes.Controllers
             if (string.IsNullOrEmpty(id)) return NotFound();
             var user = await _userManager.FindByIdAsync(id);
             if (user == null) return NotFound();
-           await _userManager.DeleteAsync(user);
+            await _userManager.DeleteAsync(user);
             return RedirectToAction("Index");
         }
-      
-        
+
+
     }
 }
