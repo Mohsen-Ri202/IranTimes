@@ -1,14 +1,17 @@
 using IranTimes.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using NewShop;
+using System;
 using WebMarkupMin.AspNetCore3;
 
-namespace NewShop
+namespace IranTimes
 {
     public class Startup
     {
@@ -52,13 +55,16 @@ namespace NewShop
             services.AddIdentity<ApplicationUser, IdentityRole>(option => {
 
                 option.Password.RequiredUniqueChars = 0;
-                option.Password.RequireNonAlphanumeric = false;
+                option.Password.RequireNonAlphanumeric = false;               
             }).AddRoles<IdentityRole>()           
                 .AddEntityFrameworkStores<NewCmsContext>()
                 .AddDefaultTokenProviders()
                 .AddErrorDescriber<PersianIdentityErrorDescriber>();
+            #endregion  
+            services.ConfigureApplicationCookie(options=> {
+                options.LoginPath = new PathString("/Account/Login");
+            });
 
-            #endregion
             services.AddMemoryCache();
 
         }

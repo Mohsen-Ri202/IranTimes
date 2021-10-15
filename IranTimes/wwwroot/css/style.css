@@ -9,7 +9,6 @@ font-family:Yekan;
 Body{
 	direction:rtl;
 }
-
 html, body {
     font-family: 'Yekan','Raleway', sans-serif;
     font-size: 100%;
@@ -110,6 +109,7 @@ label.icon-search {
 	-webkit-transition: height 0.2s ease-out 0.5s , top 0.2s ease-out 0.5s, padding 0.2s ease-out 0.5s, width 0.3s ease-out 0.2s;
 }
 .search_form form{
+  
 	opacity:0;
 	transition:all 0.3s ease-out;
 	-webkit-transition:all 0.3s ease-out;
@@ -322,7 +322,7 @@ label.on{
     -o-background-size: cover;
     -ms-background-size: cover;
     -moz-background-size: cover;
-    min-height: 600px;
+    min-height: 470px;
 }
 .banner-1 {
     background-image: url(../images/247131.jpg);

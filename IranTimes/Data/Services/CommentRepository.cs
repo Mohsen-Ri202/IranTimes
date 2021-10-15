@@ -1,9 +1,10 @@
-﻿using System;
+﻿using NewShop;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace NewShop
+namespace IranTimes
 {
     public class CommentRepository : ICommentRepository
     {

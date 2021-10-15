@@ -6,7 +6,7 @@
 }
 
 <p>
-    <a asp-action="AddRoles">ایجاد مقام جدید</a>
+    <a asp-action="AddRoles" class="btn btn-success">ایجاد مقام جدید</a>
 </p>
 
 @{ 
@@ -33,8 +33,8 @@
             </td>
             <td>
                 <form asp-action="DeleteRole" asp-route-id="@item.Id" method="post">
-                    <a class="btn btn-warning" asp-action="EditeRole" asp-route-Id="@item.Id">Edit</a> |
-                    <input value="Delete" type="submit" class="btn btn-danger"/>
+                    <a class="btn btn-warning" asp-action="EditeRole" asp-route-Id="@item.Id">ویرایش</a> |
+                    <input value="حذف" type="submit" class="btn btn-danger"/>
                 </form>
              </td>
         </tr>

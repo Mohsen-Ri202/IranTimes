@@ -1,21 +1,17 @@
 ﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
+using IranTimes.Models;
+using NewShop;
 using NewShop.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
-namespace NewShop.Areas
+namespace IranTimes.Areas
 {
     [Area("Admin")]
     [Authorize(Roles = "Admin")]
     public class PageGroupController : Controller
     {
-        private IPageGroupRepository _pageGroupRepository;
-        private NewCmsContext _context;
+        private readonly IPageGroupRepository _pageGroupRepository;
+        private readonly NewCmsContext _context;
         public PageGroupController(IPageGroupRepository pageGroupRepository, NewCmsContext context)
         {
             _pageGroupRepository = pageGroupRepository;

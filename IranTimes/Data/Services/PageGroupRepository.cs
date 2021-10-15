@@ -1,15 +1,15 @@
-﻿using NewShop.Models;
-using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
+using IranTimes.Models;
 using Microsoft.EntityFrameworkCore;
+using NewShop;
+using NewShop.Models;
 
-namespace NewShop
+namespace IranTimes
 {
     public class PageGroupRepository : IPageGroupRepository
     {
-        private NewCmsContext _Context;
+        private readonly NewCmsContext _Context;
         public PageGroupRepository(NewCmsContext context)
         {
             _Context = context;

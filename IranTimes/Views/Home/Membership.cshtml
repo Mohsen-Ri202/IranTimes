@@ -1,0 +1,23 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<head>
+    <link href="~/css/style.css" rel="stylesheet" />
+</head>
+<body>
+    <div class="row" >
+
+        <form asp-action="Membership" method="post" class="box-shadow" style="display:inline-block; font-size:20px;margin:auto" >
+            <label for="price">اشتراک 1 ماهه : 15.000 تومان</label>
+            <input id="price" type="radio" value="15000" name="price" /> |
+
+            <label for="price2">اشتراک 2 ماهه : 29.000 تومان</label>
+            <input id="price2" type="radio" value="29000" name="price" /> |
+
+            <label for="price3">اشتراک 6 ماهه : 50.000 هزار تومان</label>
+            <input id="price3" type="radio" value="50000" name="price" />
+           
+            <input type="submit" value="پرداخت" class="btn btn-success center-block"  />
+        </form>
+    </div>
+</body>

@@ -1,11 +1,11 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Caching.Memory;
+using NewShop;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 
-namespace NewShop
+namespace IranTimes
 {
     public class PageRepository : IPageRepository
     {
@@ -21,21 +21,20 @@ namespace NewShop
             List<Page> pages;
             if (!_cache.TryGetValue("", out pages))
             {
-                 pages = _context.Pages.Include(x => x.PageGroup).OrderByDescending(o => o.CreateDate).ToList();
-
-            _cache.Set("", pages, TimeSpan.FromMinutes(2));
-        }
+                pages = _context.Pages.Include(x => x.PageGroup).OrderByDescending(o => o.CreateDate).ToList();
+                _cache.Set("", pages, TimeSpan.FromMinutes(2));
+            }
             return pages;
         }
         public void Insert(Page page)
         {
-           _context.Pages.Add(page);
+            _context.Pages.Add(page);
         }
         public void DeleteById(int id)
         {
             var page = _context.Pages.FirstOrDefault(p => p.id == id);
             PageDelete(page);
-        }       
+        }
         public void PageDelete(Page page)
         {
             _context.Pages.Remove(page);
@@ -53,21 +52,26 @@ namespace NewShop
 
         public Page GetPageById(int id)
         {
-          var page=  _context.Pages.Include(i=>i.Comments).FirstOrDefault(p=>p.id==id);
+            var page = _context.Pages.Include(i => i.Comments).FirstOrDefault(p => p.id == id);
             return page;
         }
 
         public void Save()
         {
-           _context.SaveChanges();
+            _context.SaveChanges();
         }
 
         public IEnumerable<Page> Search(string parameter)
         {
-           return _context.Pages.Where(w=> w.Text.Contains(parameter) || 
-           w.PageGroup.GroupName.Contains(parameter)||
-           w.Title.Contains(parameter) ||
-           w.ShortDescription.Contains(parameter));
+            return _context.Pages.Where(w => w.Text.Contains(parameter) ||
+            w.PageGroup.GroupName.Contains(parameter) ||
+            w.Title.Contains(parameter) ||
+            w.ShortDescription.Contains(parameter));
+        }
+
+        public int PageCount()
+        {
+            return _context.Pages.Count();
         }
     }
 }

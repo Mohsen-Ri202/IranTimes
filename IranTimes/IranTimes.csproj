@@ -5,11 +5,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Migrations\20210923180901_identiy.cs" />
-    <Compile Remove="Migrations\20210923180901_identiy.Designer.cs" />
-  </ItemGroup>
-
-  <ItemGroup>
     <Content Remove="wwwroot\js\bootstrap.min.css" />
   </ItemGroup>
 

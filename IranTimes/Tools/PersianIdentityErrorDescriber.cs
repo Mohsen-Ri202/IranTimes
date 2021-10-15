@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 
-namespace NewShop
+namespace IranTimes
 {
     public class PersianIdentityErrorDescriber : IdentityErrorDescriber
     {

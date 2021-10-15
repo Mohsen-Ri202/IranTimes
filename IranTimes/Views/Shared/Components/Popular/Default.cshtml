@@ -3,11 +3,11 @@
 {
 <div class="blog-grids wow fadeInDown animated" data-wow-duration=".8s" data-wow-delay=".2s" style="visibility: visible; animation-duration: 0.8s; animation-delay: 0.2s; animation-name: fadeInDown;">
     <div class="blog-grid-right">
-        <a href="singlepage.html"><img src="~/ImageFile/@item.ImageName" class="img-responsive" alt=""></a>
+        <a asp-controller="News" asp-action="ShowNews" asp-route-id="@item.id"><img src="~/ImageFile/@item.ImageName" class="img-responsive" alt=""></a>
     </div>
     <div class="blog-grid-left">
 
-        <h5><a href="singlepage.html">@item.Title </a> </h5>
+        <h5><a asp-controller="News" asp-action="ShowNews" asp-route-id="@item.id">@item.Title </a> </h5>
     </div>
     <div class="blog-grid-left">
 

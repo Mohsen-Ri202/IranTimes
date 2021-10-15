@@ -13,16 +13,15 @@ using Microsoft.AspNetCore.Authorization;
 using IranTimes.Models;
 using Microsoft.Extensions.Caching.Memory;
 
-namespace NewShop.Areas
+namespace IranTimes.Areas
 {
     [Area("Admin")]
     [Authorize(Roles = "Admin")]
-    [Authorize(Roles = "Owner")]
     public class HomeController : Controller
     {
         private readonly NewCmsContext _context;
-        private IPageRepository _pageRepository;
-        private IPageGroupRepository _pageGroupRepository;      
+        private readonly IPageRepository _pageRepository;
+        private readonly IPageGroupRepository _pageGroupRepository;      
         public HomeController(NewCmsContext context, IPageRepository pageRepository
         , IPageGroupRepository pageGroupRepository)
         {

@@ -3,7 +3,7 @@
             <div class="tc-ch wow fadeInDown animated" data-wow-duration=".8s" data-wow-delay=".2s" style="visibility: visible; animation-duration: 0.8s; animation-delay: 0.2s; animation-name: fadeInDown;">
 
                 <div class="tch-img">
-                    <a href="singlepage.html"><img src="~/ImageFile/@Model.ImageName" class="img-responsive" alt=""></a>
+                    <a asp-controller="News" asp-action="ShowNews" asp-route-id="@Model.id"><img src="~/ImageFile/@Model.ImageName" class="img-responsive" alt=""></a>
                 </div>
 
                 <h3>

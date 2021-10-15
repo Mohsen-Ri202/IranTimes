@@ -1,14 +1,13 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
+using NewShop;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace NewShop
+namespace IranTimes
 {
     public class PopularViewComponent: ViewComponent
     {
-        private IPageRepository _pagerepository;
+        private readonly IPageRepository _pagerepository;
         public PopularViewComponent(IPageRepository pageRepository)
         {
             _pagerepository = pageRepository;

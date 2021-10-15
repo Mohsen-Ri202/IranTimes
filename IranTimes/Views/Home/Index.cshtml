@@ -1,6 +1,7 @@
 ﻿@model IEnumerable<Page>
 @{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "صفحه اصلی";
+ 
 }
 
 <html>
@@ -20,7 +21,7 @@
                 @if (ViewBag.PageId != 1)
                 {
                     <li class="page-item">
-                        <a class="page-link" asp-controller="Home" asp-action="Index" asp-route-pageid="@(--ViewBag.PageId)" aria-label="Previous">
+                        <a class="page-link" asp-controller="Home" asp-action="Index" asp-route-pageid="@(ViewBag.PageId-1)" aria-label="Previous">
                             <span aria-hidden="true">«</span>
                         </a>
                     </li>
@@ -33,7 +34,7 @@
                 @if (ViewBag.PageId == ViewBag.PageCount)
                 {
                     <li class="page-item">
-                        <a class="page-link" asp-controller="Home" asp-action="Index" asp-route-pageid="@(++ViewBag.PageId)" aria-label="Next">
+                        <a class="page-link" asp-controller="Home" asp-action="Index" asp-route-pageid="@(ViewBag.PageId+1)" aria-label="Next">
                             <span aria-hidden="true">»</span>
                         </a>
                     </li>

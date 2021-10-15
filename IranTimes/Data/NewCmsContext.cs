@@ -1,11 +1,12 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using NewShop.Models;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using IranTimes.Models;
 using Microsoft.AspNetCore.Identity;
 using System;
+using NewShop;
+using NewShop.Models;
 
-namespace NewShop
+namespace IranTimes
 {
     public class NewCmsContext:IdentityDbContext<ApplicationUser>
     {

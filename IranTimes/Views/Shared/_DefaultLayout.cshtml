@@ -49,8 +49,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                         <nav class="link-effect-7" id="link-effect-7">
                             <ul class="nav navbar-nav">
                                 <li class="active act"><a asp-controller="Home" asp-action="Index">صفحه اصلی</a></li>
-                                <li><a asp-action="AboutUs">درباره ما</a></li>
-                                <li><a asp-action="ContactUs">تماس با ما</a></li>
+                                <li><a asp-controller="Home" asp-action="AboutUs">درباره ما</a></li>
+                                <li><a asp-controller="Home" asp-action="ContactUs">تماس با ما</a></li>
                             </ul>
                         </nav>
                     </div>
@@ -109,8 +109,6 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
             </div>
             <!-- technology-left -->
             <div class="col-md-3 technology-left">
-
-
                 <div class="blo-top1">
 
                     <div class="tech-btm">
@@ -148,7 +146,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                             <a href="http://instagram.com" class="fa fa-instagram" style="width: 20px; margin: auto"></a>
                             <div class="twt">
                             </div>
-                            @*<iframe id="twitter-widget-0" scrolling="no" frameborder="0" allowtransparency="true" class="twitter-hashtag-button twitter-hashtag-button-rendered twitter-tweet-button" title="Twitter Tweet Button" src="https://twitter.com/widgets/tweet_button.b7de008f493a5185d8df1aedd62d77c6.en.html#button_hashtag=TwitterStories&amp;dnt=false&amp;id=twitter-widget-0&amp;lang=en&amp;original_referer=https%3A%2F%2Fp.w3layouts.com%2Fdemos%2Fduplex%2Fweb%2F&amp;size=l&amp;time=1467721486626&amp;type=hashtag" style="position: static; visibility: visible; width: 166px; height: 28px;"></iframe>*@
+                          
                             <script>!function (d, s, id) { var js, fjs = d.getElementsByTagName(s)[0], p = /^http:/.test(d.location) ? 'http' : 'https'; if (!d.getElementById(id)) { js = d.createElement(s); js.id = id; js.src = p + '://platform.twitter.com/widgets.js'; fjs.parentNode.insertBefore(js, fjs); } }(document, 'script', 'twitter-wjs');</script>
                         </div>
                     </div>
@@ -163,10 +161,10 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
         <div class="container">
             <div class="col-md-4 footer-right wow fadeInDown" data-wow-duration=".8s" data-wow-delay=".2s">
                 <h4>درباره من</h4>
-                <p>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است</p>
+                <p>خبرگزاری ایران تایمز که در حال حاضر سرپرستی و مدیریت روزنامه ایران تایمز را بر عهده دارد یک خبرگزاری بین المللی است که هواره مقیاس آن در حال گسترش است از این رو ...</p>
                 <img src="images/t4.jpg" class="img-responsive" alt="">
                 <div class="bht1">
-                    <a href="singlepage.html">ادامه مطلب</a>
+                    <a asp-action="AboutUs">ادامه مطلب</a>
                 </div>
             </div>
             <div class="col-md-4 footer-middle wow fadeInDown" data-wow-duration=".8s" data-wow-delay=".2s">
@@ -174,22 +172,22 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                     آخرین توییت
                 </h4>
                 <div class="mid-btm">
-                    <p>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است</p>
+                    <p> تیم ملی فوتبال ایران با نتیجه 1 بر 0 در مقابل امارات پیروز میدان شد .</p>
                 </div>
 
-                <p>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است</p>
+                <p> هفته گذشته وزیر امورخارجه کشورمان با سید حسن نصر الله دیدار کرد .</p>
 
             </div>
             <div class="col-md-4 footer-left wow fadeInDown" data-wow-duration=".8s" data-wow-delay=".2s">
                 <h4>
                     عضویت در خبرنامه
                 </h4>
-                <p>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است</p>
+                <p>با عضویت در خبرنامه میتوانید از جدیدترین اخبار روز دنیا مطلع شوید </p>
                 <div class="name">
-                    <form action="#" method="post">
-                        <input type="text" placeholder="نام" required="">
-                        <input type="text" placeholder="ایمیل" required="">
-                        <input type="submit" value="همین الان عضو شوید">
+                    <form asp-controller="Home" asp-action="NewsLetter" method="post">
+                        <input type="text" placeholder="نام و نام خانوادگی" required="">
+                        <input type="email" placeholder="ایمیل" required="" style="width:100%;padding:.5em" >                      
+                        <input type="submit" value="همین الان عضو خبرنامه شوید" >
                     </form>
 
                 </div>
@@ -198,11 +196,6 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 
             </div>
             <div class="clearfix"></div>
-        </div>
-    </div>
-    <div class="copyleft wow fadeInDown" data-wow-duration=".8s" data-wow-delay=".2s">
-        <div class="container">
-            <p>کلیه حقوق مادی و معنوی برای مجموعه برنامه نویسان محفوظ می باشد </p>
         </div>
     </div>
     <script src="~/js/modal.js"></script>

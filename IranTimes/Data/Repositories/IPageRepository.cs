@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace NewShop
 {
@@ -14,6 +12,7 @@ namespace NewShop
         public List<Page> GetAllPages();
         public Page GetPageById(int id);
         public IEnumerable<Page> Search(string parameter);
+        public int PageCount();
         public void Save();
 
     }

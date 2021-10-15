@@ -1,11 +1,12 @@
-﻿using System;
+﻿using Microsoft.VisualStudio.Web.CodeGeneration.Utils.Messaging;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Mail;
 using System.Threading.Tasks;
 
-namespace NewShop
+namespace IranTimes
 {
     public class MessageSender : IMessageSender
     {

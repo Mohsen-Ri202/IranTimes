@@ -1,14 +1,15 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using NewShop;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace NewShop
+namespace IranTimes
 {
     public class ShowCommentViewComponent:ViewComponent
     {
-        private ICommentRepository _commentRepository;
+        private readonly ICommentRepository _commentRepository;
         public ShowCommentViewComponent(ICommentRepository commentRepository)
         {
             _commentRepository = commentRepository;

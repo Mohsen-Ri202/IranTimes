@@ -1,8 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -11,7 +9,7 @@ namespace IranTimes.Controllers
     [Authorize(Roles = "Owner")]
     public class RoleManagerController : Controller
     {
-        private RoleManager<IdentityRole> _rolemanager;
+        private readonly RoleManager<IdentityRole> _rolemanager;
         public RoleManagerController(RoleManager<IdentityRole> roleManager)
         {
             _rolemanager = roleManager;
