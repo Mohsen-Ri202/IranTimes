@@ -35,18 +35,22 @@
                 </label>
             </div>
             <div class="form-group">
+                <label asp-for="ImageName"></label><br />
                 <input type="file" name="ImgUp" />
+                <span asp-validation-for="ImageName" class="text-danger"></span>
             </div>
-
-        <select asp-for="PageGroupId">
-            @foreach (var item in Model.PageGroups)
-            {
-                <option value="@item.Id">
-                    @item.GroupName
-                </option>
-            }
-        </select>
-
+            <div class="form-group list-group">
+                <label asp-for="PageGroups"></label>
+                <select asp-for="PageGroupId">
+                    @foreach (var item in Model.PageGroups)
+                    {
+                        <option value="@item.Id">
+                            @item.GroupName
+                        </option>
+                    }
+                </select>
+            </div>
+            <br />
             <div class="form-group">
                 <input type="submit" value="ثبت" class="btn btn-success" />
             </div>

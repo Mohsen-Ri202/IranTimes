@@ -10,11 +10,11 @@ using Microsoft.EntityFrameworkCore;
 
 namespace IranTimes.Controllers
 {
-    //[Authorize(Roles = "Owner")]
+    [Authorize(Roles = "Owner")]
     public class UserManagerController : Controller
     {
-        private RoleManager<IdentityRole> _roleManager;
-        private UserManager<ApplicationUser> _userManager;
+        private readonly RoleManager<IdentityRole> _roleManager;
+        private readonly UserManager<ApplicationUser> _userManager;
 
         public UserManagerController
             (RoleManager<IdentityRole> roleManager,

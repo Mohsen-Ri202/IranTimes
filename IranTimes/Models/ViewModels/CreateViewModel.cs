@@ -31,6 +31,7 @@ namespace IranTimes.Models
         [Display(Name = "تاریخ")]
         public DateTime CreateDate { get; set; }
         public int PageGroupId { get; set; }
+        [Display(Name ="نام گروه")]
         public IEnumerable<PageGroup> PageGroups { get; set; }
     }
 }
