@@ -25,7 +25,7 @@ namespace IranTimes
             //    _cache.Set("", pages, TimeSpan.FromMinutes(2));
             //}
             //return pages;
-            return _context.Pages.ToList();
+            return _context.Pages.Include(i=>i.PageGroup).ToList();
         }
         public void Insert(Page page)
         {

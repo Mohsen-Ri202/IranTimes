@@ -16,7 +16,7 @@ using Microsoft.Extensions.Caching.Memory;
 namespace IranTimes.Areas
 {
     [Area("Admin")]
-    [Authorize(Roles = "Admin")]
+    [Authorize(Roles ="Admin")]
     public class HomeController : Controller
     {
         private readonly NewCmsContext _context;
