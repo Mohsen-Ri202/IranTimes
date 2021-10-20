@@ -18,13 +18,14 @@ namespace IranTimes
         }
         public List<Page> GetAllPages()
         {
-            List<Page> pages;
-            if (!_cache.TryGetValue("", out pages))
-            {
-                pages = _context.Pages.Include(x => x.PageGroup).OrderByDescending(o => o.CreateDate).ToList();
-                _cache.Set("", pages, TimeSpan.FromMinutes(2));
-            }
-            return pages;
+            //List<Page> pages;
+            //if (!_cache.TryGetValue("", out pages))
+            //{
+            //    pages = _context.Pages.Include(x => x.PageGroup).OrderByDescending(o => o.CreateDate).ToList();
+            //    _cache.Set("", pages, TimeSpan.FromMinutes(2));
+            //}
+            //return pages;
+            return _context.Pages.ToList();
         }
         public void Insert(Page page)
         {

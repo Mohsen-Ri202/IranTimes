@@ -90,7 +90,7 @@ namespace IranTimes.Areas
                 Page page = new Page()
                 {
                     ImageName = model.ImageName,
-                    PageGroupId = model.PageGroupId,
+                    PageGroupId = model.PageGroupId,                    
                     ShortDescription = model.ShortDescription,
                     ShowInSlider = model.ShowInSlider,
                     Text = model.Text,
@@ -183,9 +183,15 @@ namespace IranTimes.Areas
                 if (System.IO.File.Exists(path))
                 {
                     System.IO.File.Delete(path);
+                    _pageRepository.PageDelete(page);
                 }
+               
             }
-            _pageRepository.PageDelete(page);
+            else
+            {
+                _pageRepository.PageDelete(page);
+            }
+          
 
             if (page == null)
             {

@@ -21,7 +21,7 @@ namespace NewShop
         public string ShortDescription { get; set; }
         [Display(Name = "متن")]
         [Required(ErrorMessage = "لطفا {0}را وارد نمایید")]
-        [MaxLength(500)]
+        [MaxLength(2000)]
         [DataType(DataType.MultilineText)]
         public string Text { get; set; }
         [Display(Name = "بازدید")]
